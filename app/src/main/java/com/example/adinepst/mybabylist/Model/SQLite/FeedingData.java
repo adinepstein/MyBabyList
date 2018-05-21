@@ -1,9 +1,9 @@
-package com.example.adinepst.mybabylist.Model;
+package com.example.adinepst.mybabylist.Model.SQLite;
 
 public class FeedingData {
-    String dateTime;
-    long amount;
-    String comment;
+    private String dateTime;
+    private long amount;
+    private String comment;
 
     public FeedingData(String dateTime, long amount, String comment) {
         this.dateTime = dateTime;
