@@ -1,11 +1,13 @@
 package com.example.adinepst.mybabylist.Model;
 
-import com.example.adinepst.mybabylist.Model.SQLite.DiaperChangingData;
+import Utils.DiaperChangingData;
+
+import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseFeeding;
 import com.example.adinepst.mybabylist.Model.SQLite.DiaperChangingSQLite;
-import com.example.adinepst.mybabylist.Model.SQLite.FeedingData;
+import Utils.FeedingData;
 import com.example.adinepst.mybabylist.Model.SQLite.FeedingSQLite;
 import com.example.adinepst.mybabylist.Model.SQLite.ModelSQLite;
-import com.example.adinepst.mybabylist.Model.SQLite.SleepingData;
+import Utils.SleepingData;
 import com.example.adinepst.mybabylist.Model.SQLite.SleepingSQLite;
 
 import java.util.List;
@@ -24,6 +26,7 @@ public class Model {
 
     public void addFeedingData(FeedingData fd){
         FeedingSQLite.addFeedingData(fd,modelSQLLite.getWritableDatabase());
+        ModelFirebaseFeeding.addFeedingData(fd);
     }
 
     public List<SleepingData> getAllSleepingData(){

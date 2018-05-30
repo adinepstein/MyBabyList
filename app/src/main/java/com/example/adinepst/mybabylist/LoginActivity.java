@@ -1,9 +1,10 @@
 package com.example.adinepst.mybabylist;
 
-import android.app.Activity;
-import android.os.Bundle;
 
-public class LoginActivity extends Activity {
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

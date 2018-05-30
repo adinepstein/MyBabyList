@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "900752277660",
+    "firebase_url": "https://mybabylist-60042.firebaseio.com",
+    "project_id": "mybabylist-60042",
+    "storage_bucket": "mybabylist-60042.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900752277660:android:74665c2c066d6268",
+        "android_client_info": {
+          "package_name": "com.example.adinepst.mybabylist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "900752277660-g1k261q4r07pb3voeqfroqagl98j5917.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "900752277660-g1k261q4r07pb3voeqfroqagl98j5917.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOytq9vlH4D3LmJhkfIBmKr6WZKK7jQ9w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

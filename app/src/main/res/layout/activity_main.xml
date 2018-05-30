@@ -6,4 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/activity_main_IV_babyImage"
+        android:layout_width="157dp"
+        android:layout_height="191dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/baby"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/activity_main_TV_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Baby's Name"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toStartOf="@+id/activity_main_IV_babyImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/activity_main_IV_babyImage" />
+
+    <TextView
+        android:id="@+id/activity_main_TV_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Age"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/activity_main_IV_babyImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_TV_name" />
 </android.support.constraint.ConstraintLayout>

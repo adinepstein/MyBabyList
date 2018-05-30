@@ -1,4 +1,4 @@
-package com.example.adinepst.mybabylist.Model.SQLite;
+package Utils;
 
 public class FeedingData {
     private String dateTime;

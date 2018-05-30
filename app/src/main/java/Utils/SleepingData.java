@@ -1,4 +1,4 @@
-package com.example.adinepst.mybabylist.Model.SQLite;
+package Utils;
 
 public class SleepingData {
     private String startDateTime;
