@@ -40,7 +40,7 @@ public class SleepingSQLite {
     static public void addSleepingData(SleepingData sd,SQLiteDatabase db){
         if(sd!=null) {
             ContentValues values = new ContentValues();
-            values.put("startDateTime", sd.getStartDateTime());
+            values.put("startDateTime", sd.getDateTime());
             values.put("endDateTime", sd.getEndDateTime());
             values.put("comment", sd.getComment());
             long rowId= db.insert(TABLE,"startDateTime", values);

@@ -1,37 +1,22 @@
 package Utils;
 
-public class FeedingData {
-    private String dateTime;
-    private long amount;
-    private String comment;
+public class FeedingData extends ActivityData {
 
-    public FeedingData(String dateTime, long amount, String comment) {
-        this.dateTime = dateTime;
+    private double amount;
+    private static String ACTIVITYTYPE= "feeding";
+
+    public FeedingData(String dateTime, double amount, String comment) {
+        super(dateTime,comment,ACTIVITYTYPE);
         this.amount = amount;
-        this.comment = comment;
-    }
 
-    public String getDateTime() {
-        return dateTime;
-    }
 
-    public long getAmount() {
+    }
+    public double getAmount() {
         return amount;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
     }
 
     public void setAmount(long amount) {
         this.amount = amount;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 }

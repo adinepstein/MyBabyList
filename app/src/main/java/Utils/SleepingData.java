@@ -1,37 +1,19 @@
 package Utils;
 
-public class SleepingData {
-    private String startDateTime;
+public class SleepingData extends ActivityData {
     private String endDateTime;
-    private String comment;
+    private static String ACTIVITYTYPE= "sleeping";
 
-    public SleepingData(String startDateTime, String endDateTime, String comment) {
-        this.startDateTime = startDateTime;
+    public SleepingData(String dateTime, String endDateTime, String comment) {
+        super(dateTime,comment,ACTIVITYTYPE);
         this.endDateTime=endDateTime;
-        this.comment = comment;
     }
-
-    public String getStartDateTime() {
-        return startDateTime;
-    }
-
     public String getEndDateTime() {
         return endDateTime;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setStartDateTime(String startDateTime) {
-        this.startDateTime = startDateTime;
     }
 
     public void setEndDateTime(String endDateTime) {
         this.endDateTime = endDateTime;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 }

@@ -1,20 +1,13 @@
 package Utils;
 
-public class DiaperChangingData {
-    private String dateTime;
+public class DiaperChangingData extends ActivityData {
     private String type;
-    private String comment;
+    private static String ACTIVITYTYPE= "diaper";
 
     public DiaperChangingData(String dateTime, String type, String comment) {
-        this.dateTime = dateTime;
+        super(dateTime,comment,ACTIVITYTYPE);
         this.type = type;
-        this.comment = comment;
     }
-
-    public String getDateTime() {
-        return dateTime;
-    }
-
     public String getType() {
         return type;
     }
@@ -23,16 +16,8 @@ public class DiaperChangingData {
         this.type = type;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
 
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+
+
 }

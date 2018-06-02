@@ -1,5 +1,7 @@
 package com.example.adinepst.mybabylist.Model;
 
+import android.util.Log;
+
 import Utils.DiaperChangingData;
 
 import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseFeeding;
@@ -25,8 +27,9 @@ public class Model {
     }
 
     public void addFeedingData(FeedingData fd){
-        FeedingSQLite.addFeedingData(fd,modelSQLLite.getWritableDatabase());
-        ModelFirebaseFeeding.addFeedingData(fd);
+        Log.d("Tag", "model- add feeding data");
+//        FeedingSQLite.addFeedingData(fd,modelSQLLite.getWritableDatabase());
+//        ModelFirebaseFeeding.addFeedingData(fd);
     }
 
     public List<SleepingData> getAllSleepingData(){

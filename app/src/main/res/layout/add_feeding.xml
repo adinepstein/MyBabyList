@@ -37,14 +37,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="Time :"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
-        android:id="@+id/sleeping_ET_startTime"
+        android:id="@+id/feading_ET_time"
         android:layout_width="107dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -55,10 +55,10 @@
         android:textColor="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/sleeping_ET_startDate" />
+        app:layout_constraintTop_toBottomOf="@+id/sleeping_ET_date" />
 
     <EditText
-        android:id="@+id/sleeping_ET_startDate"
+        android:id="@+id/feading_ET_date"
         android:layout_width="107dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -67,13 +67,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintStart_toEndOf="@+id/textView6" />
 
-    <RadioButton
-        android:id="@+id/diaperChanging_RB_now"
+    <CheckBox
+        android:id="@+id/feeding_CB_now"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="52dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="48dp"
         android:text="Now"
         android:textColor="@android:color/darker_gray"
         android:textSize="36sp"
@@ -86,15 +86,17 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Comment: "
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/feading_IB_submit"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sleeping_ET_startTime" />
+        app:layout_constraintTop_toBottomOf="@+id/feading_ET_time" />
 
     <EditText
-        android:id="@+id/sleeping_ET_comment"
+        android:id="@+id/feading_ET_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -112,12 +114,9 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sleeping_ET_comment"
-        app:layout_constraintVertical_bias="0.661"
         app:srcCompat="@drawable/submit1" />
 
     <TextView
