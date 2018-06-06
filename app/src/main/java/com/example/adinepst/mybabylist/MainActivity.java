@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         if (switched){
-            Log.d("TAG","add item selected");
             FragmentTransaction tran = getSupportFragmentManager().beginTransaction();
             tran.replace(R.id.main_frame, fragment);
             tran.addToBackStack(" ");

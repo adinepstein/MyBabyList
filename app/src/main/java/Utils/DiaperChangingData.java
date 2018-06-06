@@ -4,8 +4,11 @@ public class DiaperChangingData extends ActivityData {
     private String type;
     private static String ACTIVITYTYPE= "diaper";
 
-    public DiaperChangingData(String dateTime, String type, String comment) {
-        super(dateTime,comment,ACTIVITYTYPE);
+    public DiaperChangingData(){}
+
+
+    public DiaperChangingData(String date,String time, String type, String comment) {
+        super(date, time,comment,ACTIVITYTYPE);
         this.type = type;
     }
     public String getType() {
@@ -16,7 +19,19 @@ public class DiaperChangingData extends ActivityData {
         this.type = type;
     }
 
+    public String getDate() {
+        return date;
+    }
 
+    public String getTime() {
+        return time;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public String getActivityType(){return activityType;}
 
 
 

@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import Utils.FeedingData;
+import Utils.UserData;
 
 
 /**
@@ -80,9 +81,12 @@ public class AddFeedingFragment extends Fragment {
                 else{
                     dateToStr= date.getText().toString() + " " + time.getText().toString();
                 }
+                String [] dateSplit= dateToStr.split(" ");
                 double amt= Double.parseDouble(amount.getText().toString());
-                FeedingData fd= new FeedingData(dateToStr,amt,comment.getText().toString());
-                Model.instance.addFeedingData(fd);
+                FeedingData fd= new FeedingData(dateSplit[0],dateSplit[1],amt,comment.getText().toString());
+                UserData ud= new UserData("aa","123456","aa","aa","aa","aa","aa","aa");
+                Model.instance.addActivityData(fd,ud);
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
 

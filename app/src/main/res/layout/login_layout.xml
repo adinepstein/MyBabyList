@@ -15,11 +15,11 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        tools:text="Baby's ID : " />
+        tools:text="Email :" />
 
     <TextView
         android:id="@+id/login_TV_password"
@@ -29,11 +29,11 @@
         android:layout_marginTop="24dp"
         android:text="TextView"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="32sp"
         android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:text="Password : " />
+        tools:text="Password: " />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline3"
@@ -43,7 +43,7 @@
         app:layout_constraintGuide_begin="16dp" />
 
     <EditText
-        android:id="@+id/login_ET_id"
+        android:id="@+id/login_ET_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -60,15 +60,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/login_TV_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.23"
-        app:layout_constraintStart_toEndOf="@+id/login_TV_password"
-        app:layout_constraintTop_toBottomOf="@+id/login_ET_id"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toEndOf="@+id/login_TV_password" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline4"
@@ -79,8 +76,8 @@
 
     <ImageButton
         android:id="@+id/login_IB_login"
-        android:layout_width="0dp"
-        android:layout_height="73dp"
+        android:layout_width="wrap_content"
+        android:layout_height="95dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="88dp"
@@ -93,10 +90,10 @@
     <ImageButton
         android:id="@+id/login_IB_register"
         android:layout_width="0dp"
-        android:layout_height="73dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

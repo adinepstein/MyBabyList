@@ -10,14 +10,18 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import Utils.ActivityData;
 import Utils.FeedingData;
+import Utils.UserData;
 
 public class ModelFirebaseFeeding {
-    final static String HEADNODE ="FeedingData";
+    final static String HEADNODE ="Activity";
+
     static private ValueEventListener eventListener;
-    static public void addFeedingData(FeedingData fd) {
-        DatabaseReference dbRef= FirebaseDatabase.getInstance().getReference().child(HEADNODE);
-        dbRef.child(HEADNODE).child(fd.getDateTime()).setValue(fd);
+
+    static public void addActivityData(ActivityData ad, UserData ud) {
+        DatabaseReference dbRef= FirebaseDatabase.getInstance().getReference().child(HEADNODE).child(ud.getId());
+        dbRef.child(ad.getDate()).child(ad.getTime()).setValue(ad);
     }
 
     interface GetAllDataListener{

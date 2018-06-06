@@ -27,11 +27,11 @@ public class FeedingSQLite {
         List<FeedingData> list= new ArrayList<>();
         if(cursor.moveToFirst()){
         do{
-            String dateTime= cursor.getString(cursor.getColumnIndex("dateTime"));
-            long amount= cursor.getLong(cursor.getColumnIndex("amount"));
-            String comment = cursor.getString(cursor.getColumnIndex("comment"));
-            FeedingData fd= new FeedingData(dateTime,amount,comment);
-            list.add(fd);
+//            String dateTime= cursor.getString(cursor.getColumnIndex("dateTime"));
+//            long amount= cursor.getLong(cursor.getColumnIndex("amount"));
+//            String comment = cursor.getString(cursor.getColumnIndex("comment"));
+//            FeedingData fd= new FeedingData(dateTime,amount,comment);
+//            list.add(fd);
         }while (cursor.moveToNext());
       }
 
@@ -40,7 +40,7 @@ public class FeedingSQLite {
     static public void addFeedingData(FeedingData fd,SQLiteDatabase db){
         if(fd!=null) {
             ContentValues values = new ContentValues();
-            values.put("dateTime", fd.getDateTime());
+            values.put("dateTime", fd.getDate());
             values.put("amount", fd.getAmount());
             values.put("comment", fd.getComment());
             long rowId= db.insert(TABLE,"dateTime", values);

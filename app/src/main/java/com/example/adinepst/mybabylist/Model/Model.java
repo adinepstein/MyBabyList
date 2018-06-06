@@ -2,6 +2,7 @@ package com.example.adinepst.mybabylist.Model;
 
 import android.util.Log;
 
+import Utils.ActivityData;
 import Utils.DiaperChangingData;
 
 import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseFeeding;
@@ -9,7 +10,11 @@ import com.example.adinepst.mybabylist.Model.SQLite.DiaperChangingSQLite;
 import Utils.FeedingData;
 import com.example.adinepst.mybabylist.Model.SQLite.FeedingSQLite;
 import com.example.adinepst.mybabylist.Model.SQLite.ModelSQLite;
+
+import Utils.PostData;
 import Utils.SleepingData;
+import Utils.UserData;
+
 import com.example.adinepst.mybabylist.Model.SQLite.SleepingSQLite;
 
 import java.util.List;
@@ -26,10 +31,17 @@ public class Model {
         return FeedingSQLite.getAllFeedingData(modelSQLLite.getReadableDatabase());
     }
 
-    public void addFeedingData(FeedingData fd){
+    public void addActivityData(ActivityData ad, UserData ud){
         Log.d("Tag", "model- add feeding data");
-//        FeedingSQLite.addFeedingData(fd,modelSQLLite.getWritableDatabase());
-//        ModelFirebaseFeeding.addFeedingData(fd);
+//        FeedingSQLite.addActivityData(fd,modelSQLLite.getWritableDatabase());
+        ModelFirebaseFeeding.addActivityData(ad,ud);
+    }
+    public void addUser(UserData ud){
+
+    }
+
+    public void addPost(PostData pd){
+
     }
 
     public List<SleepingData> getAllSleepingData(){

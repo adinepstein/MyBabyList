@@ -15,6 +15,7 @@ import java.util.Date;
 
 import Utils.FeedingData;
 import Utils.SleepingData;
+import Utils.UserData;
 
 
 /**
@@ -68,11 +69,15 @@ public class AddSleepingFragment extends Fragment {
         submitBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String dateTime= date.getText().toString() + " " + time.getText().toString();
-                String endDateTime = endDate.getText().toString() + " " + endTime.getText().toString();
+                String startDate= date.getText().toString();
+                String startTime = time.getText().toString();
+                String endDateS = endDate.getText().toString();
+                String endTimeS = endTime.getText().toString();
                 String com= comment.getText().toString();
-                SleepingData sd= new SleepingData(dateTime,endDateTime,com);
-                Model.instance.addSleepingData(sd);
+                SleepingData sd= new SleepingData(startDate,startTime,endDateS,endTimeS,com);
+                UserData ud= new UserData("aa","123456","aa","aa","aa","aa","aa","aa");
+                Model.instance.addActivityData(sd,ud);
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
 

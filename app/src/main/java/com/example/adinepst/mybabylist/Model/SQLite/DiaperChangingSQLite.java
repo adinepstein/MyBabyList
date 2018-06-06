@@ -27,11 +27,11 @@ public class DiaperChangingSQLite {
         List<DiaperChangingData> list= new ArrayList<>();
         if(cursor.moveToFirst()){
         do{
-            String dateTime= cursor.getString(cursor.getColumnIndex("dateTime"));
-            String type= cursor.getString(cursor.getColumnIndex("type"));
-            String comment = cursor.getString(cursor.getColumnIndex("comment"));
-            DiaperChangingData dcd= new DiaperChangingData(dateTime,type,comment);
-            list.add(dcd);
+//            String dateTime= cursor.getString(cursor.getColumnIndex("dateTime"));
+//            String type= cursor.getString(cursor.getColumnIndex("type"));
+//            String comment = cursor.getString(cursor.getColumnIndex("comment"));
+//            DiaperChangingData dcd= new DiaperChangingData(dateTime,type,comment);
+//            list.add(dcd);
         }while (cursor.moveToNext());
       }
 
@@ -40,9 +40,9 @@ public class DiaperChangingSQLite {
     static public void addDiaperChangingData(DiaperChangingData dcd,SQLiteDatabase db){
         if(dcd!=null) {
             ContentValues values = new ContentValues();
-            values.put("dateTime", dcd.getDateTime());
-            values.put("type", dcd.getType());
-            values.put("comment", dcd.getComment());
+//            values.put("dateTime", dcd.getDateTime());
+//            values.put("type", dcd.getType());
+//            values.put("comment", dcd.getComment());
             long rowId= db.insert(TABLE,"dateTime", values);
         }
 

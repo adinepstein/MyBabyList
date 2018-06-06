@@ -27,11 +27,11 @@ public class SleepingSQLite {
         List<SleepingData> list= new ArrayList<>();
         if(cursor.moveToFirst()){
         do{
-            String startDateTime= cursor.getString(cursor.getColumnIndex("startDateTime"));
-            String endDateTime= cursor.getString(cursor.getColumnIndex("endDateTime"));
-            String comment = cursor.getString(cursor.getColumnIndex("comment"));
-            SleepingData sd= new SleepingData(startDateTime,endDateTime,comment);
-            list.add(sd);
+//            String startDateTime= cursor.getString(cursor.getColumnIndex("startDateTime"));
+//            String endDateTime= cursor.getString(cursor.getColumnIndex("endDateTime"));
+//            String comment = cursor.getString(cursor.getColumnIndex("comment"));
+////            SleepingData sd= new SleepingData(startDateTime,endDateTime,comment);
+//            list.add(sd);
         }while (cursor.moveToNext());
       }
 
@@ -40,8 +40,8 @@ public class SleepingSQLite {
     static public void addSleepingData(SleepingData sd,SQLiteDatabase db){
         if(sd!=null) {
             ContentValues values = new ContentValues();
-            values.put("startDateTime", sd.getDateTime());
-            values.put("endDateTime", sd.getEndDateTime());
+//            values.put("startDateTime", sd.getDateTime());
+//            values.put("endDateTime", sd.getEndDateTime());
             values.put("comment", sd.getComment());
             long rowId= db.insert(TABLE,"startDateTime", values);
         }

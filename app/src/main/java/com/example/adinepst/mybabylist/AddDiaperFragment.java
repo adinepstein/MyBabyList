@@ -18,6 +18,7 @@ import java.util.Date;
 
 import Utils.DiaperChangingData;
 import Utils.FeedingData;
+import Utils.UserData;
 
 
 /**
@@ -93,8 +94,11 @@ public class AddDiaperFragment extends Fragment {
                 else if(selected==R.id.diaperChanging_RB_urine)
                     diaperType ="urine";
                 String com=comment.getText().toString();
-                DiaperChangingData dcd= new DiaperChangingData(dateToStr,diaperType,com);
-                Model.instance.addDiaperChangingData(dcd);
+                String [] dateSplit=dateToStr.split(" ");
+                DiaperChangingData dcd= new DiaperChangingData(dateSplit[0],dateSplit[1],diaperType,com);
+                UserData ud= new UserData("bb","22222","bb","bb","bb","bb","bb","bb");
+                Model.instance.addActivityData(dcd,ud);
+                getActivity().getSupportFragmentManager().popBackStack();
 
             }
         });
