@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/border_design"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/add_a_post"
+        android:textColor="#2116bc"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/addPost_ET_comment"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/border_design"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/addPost_RG_fatherMother"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+    <ImageButton
+        android:id="@+id/addPost_IB_image"
+        android:layout_width="79dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border_design"
+        app:layout_constraintBottom_toBottomOf="@+id/addPost_ET_comment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addPost_ET_comment"
+        app:layout_constraintTop_toBottomOf="@+id/addPost_RG_fatherMother"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <RadioGroup
+        android:id="@+id/addPost_RG_fatherMother"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/addPost_ET_comment">
+
+        <RadioButton
+            android:id="@+id/addPost_RB_mother"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="mother"
+            android:textColor="#2116bc"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/addPost_RB_father"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="father"
+            android:textColor="#2116bc"
+            android:textSize="24sp" />
+    </RadioGroup>
+
+    <ImageButton
+        android:id="@+id/addPost_IB_post"
+        android:layout_width="236dp"
+        android:layout_height="95dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addPost_ET_comment"
+        app:srcCompat="@drawable/post" />
+
+</android.support.constraint.ConstraintLayout>
