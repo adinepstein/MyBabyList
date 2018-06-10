@@ -1,7 +1,10 @@
 package com.example.adinepst.mybabylist;
 
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -17,6 +20,8 @@ import com.example.adinepst.mybabylist.Model.Model;
 
 import Utils.SleepingData;
 import Utils.UserData;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +49,9 @@ public class RegisterFragment extends Fragment {
     private ImageButton submitBT;
     private RadioButton boyRB;
     private RadioButton girlRB;
+    private Bitmap imageBitmap;
+    private ImageButton babyImage;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
     public RegisterFragment() {
@@ -66,29 +74,54 @@ public class RegisterFragment extends Fragment {
         submitBT= view.findViewById(R.id.register_IM_register);
         boyRB = view.findViewById(R.id.register_RB_boy);
         girlRB = view.findViewById(R.id.register_RB_girl);
-        imageUrl=null;
+        babyImage= view.findViewById(R.id.user_details_IV_babyImage);
         submitBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserData ud= new UserData(nameET.getText().toString(),idET.getText().toString(),getSexString(),birthDateET.getText().toString(),motherNameET.getText().toString(),fatherNameET.getText().toString(),emailET.getText().toString(),imageUrl);
-                Model.instance.addUser(ud);
-                UserDetailsFragment fragment = new UserDetailsFragment();
-                FragmentTransaction tran = getActivity().getSupportFragmentManager().beginTransaction();
-                tran.replace(R.id.main_frame, fragment);
-                tran.addToBackStack(" ");
-                tran.commit();
-            }
-        });
+                final UserData ud = new UserData(nameET.getText().toString(), idET.getText().toString(), getSexString(), birthDateET.getText().toString(), motherNameET.getText().toString(), fatherNameET.getText().toString(), emailET.getText().toString(), null);
+                if (imageBitmap != null) {
+                    Model.instance.saveImage(imageBitmap, new Model.SaveImageListener() {
+                        @Override
+                        public void onDone(String url) {
+                            //save student obj
+                            imageUrl = url;
+                            ud.setImageUrl(imageUrl);
+                            Model.instance.addUser(ud);
+                        }
+                    });}
 
-
-
-        ImageButton submitBT=view.findViewById(R.id.sleeping_IB_submit);
-
-
+                    UserDetailsFragment fragment = new UserDetailsFragment();
+                    FragmentTransaction tran = getActivity().getSupportFragmentManager().beginTransaction();
+                    tran.replace(R.id.main_frame, fragment);
+                    tran.addToBackStack(" ");
+                    tran.commit();
+                babyImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent takePictureIntent = new Intent(
+                                MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                        }
+                    }
+                });
+            }});
         updateInstanceState(savedInstanceState);
 
         return view;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE &&
+                resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+            babyImage.setImageBitmap(imageBitmap);
+        }
+    }
+
     private String getSexString(){
         String sex=null;
         int selected=sexRG.getCheckedRadioButtonId();

@@ -3,7 +3,7 @@ package Utils;
 public class SleepingData extends ActivityData {
     private String endDate;
     private String endTime;
-    private static String ACTIVITYTYPE= "sleeping";
+    private static String ACTIVITYTYPE= "add_sleeping";
 
     public SleepingData(){}
 

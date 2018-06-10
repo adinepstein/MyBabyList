@@ -2,30 +2,42 @@ package Utils;
 
 public class PostData {
     private String comment;
-    private String parentType;
+    private String parentName;
     private String date;
-    private String url;
+    private String uploadImgUrl;
+    private String postId;
+    private String babyImageUrl;
 
-    public PostData(String comment, String parentType, String date, String url) {
+    public PostData(String comment, String parentName, String date, String uploadImgUrl, String babyImageUrl) {
         this.comment = comment;
-        this.parentType = parentType;
+        this.parentName = parentName;
         this.date = date;
-        this.url = url;
+        this.uploadImgUrl = uploadImgUrl;
+        this.postId= parentName + "_" + date;
+        this.babyImageUrl= babyImageUrl;
     }
 
     public String getComment() {
         return comment;
     }
 
-    public String getParentType() {
-        return parentType;
+    public String getParentName() {
+        return parentName;
     }
 
     public String getDate() {
         return date;
     }
 
-    public String getUrl() {
-        return url;
+    public String getUploadImgUrl() {
+        return uploadImgUrl;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public String getBabyImageUrl() {
+        return babyImageUrl;
     }
 }

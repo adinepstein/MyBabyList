@@ -1,8 +1,13 @@
 package com.example.adinepst.mybabylist;
 
+
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -12,24 +17,71 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class HistoryFragment extends Fragment {
 
-public class HistoryActivity extends AppCompatActivity {
+    private HistoryListAdapter adapter;
+
+    public HistoryFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.history_layout);
-
-        ListView list= findViewById(R.id.history_LV_list);
-        HistoryListAdapter adapter = new HistoryListAdapter();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.history_layout, container, false);
+        ListView list= view.findViewById(R.id.history_LV_list);
+        adapter = new HistoryListAdapter();
         for(int i=0; i<50; i++){
             HistoryData h= new HistoryData(""+ i+ "/01/18",""+i, "150." + i, "15."+ i, ""+i, ""+ i);
             adapter.data.add(h);
         }
         list.setAdapter(adapter);
+        setHasOptionsMenu(true);
+        return view;
     }
 
-    public class HistoryListAdapter extends BaseAdapter{
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu,inflater);
+        menu.clear();
+        inflater.inflate(R.menu.menu_add_activity,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        boolean switched=false;
+        Fragment fragment=null;
+        switch (id) {
+            case R.id.menu_MI_add_feeding:
+                fragment = new AddFeedingFragment();
+                switched=true;
+                break;
+            case R.id.menu_MI_add_sleeping:
+                fragment = new AddSleepingFragment();
+                switched=true;
+                break;
+            case R.id.menu_MI_add_diaper:
+                fragment = new AddDiaperFragment();
+                switched=true;
+                break;
+        }
+        if (switched){
+            FragmentTransaction tran = getActivity().getSupportFragmentManager().beginTransaction();
+            tran.replace(R.id.main_frame, fragment);
+            tran.addToBackStack(" ");
+            tran.commit();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+    public class HistoryListAdapter extends BaseAdapter {
 
         List<HistoryData> data = new ArrayList<>();
 
@@ -52,9 +104,9 @@ public class HistoryActivity extends AppCompatActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if(view==null){
-                view = LayoutInflater.from(HistoryActivity.this).inflate(R.layout.history_row,null);
+                view = LayoutInflater.from(getActivity()).inflate(R.layout.history_row,null);
             }
-         HistoryData hd= data.get(i);
+            HistoryData hd= data.get(i);
             TextView date= view.findViewById(R.id.history_row_day);
             date.setText(hd.day);
             TextView numFeading = view.findViewById(R.id.history_row_numOfFood);
@@ -68,7 +120,7 @@ public class HistoryActivity extends AppCompatActivity {
             TextView numPoop = view.findViewById(R.id.history_row_numPoop);
             numPoop.setText(hd.numOfPoops);
 
-           return view;
+            return view;
 
         }
     }

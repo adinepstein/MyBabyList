@@ -10,10 +10,6 @@ import android.widget.ImageButton;
 
 import com.example.adinepst.mybabylist.Model.Model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import Utils.FeedingData;
 import Utils.SleepingData;
 import Utils.UserData;
 
@@ -57,7 +53,7 @@ public class AddSleepingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.sleeping, container, false);
+        View view=inflater.inflate(R.layout.add_sleeping, container, false);
         endDate= view.findViewById(R.id.sleeping_ET_endDate);
         endTime = view.findViewById(R.id.sleeping_ET_endTime);
         date = view.findViewById(R.id.sleeping_ET_date);
