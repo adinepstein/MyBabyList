@@ -68,7 +68,7 @@ public class ForumActivity extends AppCompatActivity {
             Date curDate = new Date();
             String dateToStr= format.format(curDate);
             //TODO- add picture
-            PostData pd= new PostData(com,parentType,dateToStr,null);
+            PostData pd= new PostData(com,parentType,dateToStr,null,null);
             Model.instance.addPost(pd);
             } });
         builder.setView(view);

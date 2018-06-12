@@ -1,5 +1,6 @@
 package com.example.adinepst.mybabylist.Model;
 
+import android.arch.lifecycle.LiveData;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.webkit.URLUtil;
@@ -8,6 +9,7 @@ import Utils.ActivityData;
 import Utils.DiaperChangingData;
 
 import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseFeeding;
+import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseForum;
 import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseUsers;
 import com.example.adinepst.mybabylist.Model.SQLite.DiaperChangingSQLite;
 import Utils.FeedingData;
@@ -26,13 +28,18 @@ public class Model {
 
     public static Model instance = new Model();
     private ModelSQLite modelSQLLite;
-    ModelFirebaseUsers modelFirebaseUsers;
-    ModelImageHandler modelImageHandler;
+    private ModelFirebaseUsers modelFirebaseUsers;
+    private ModelImageHandler modelImageHandler;
+    private ForumListLiveData forumListLiveData;
+    private ModelFirebaseForum modelFirebaseForum;
+
 
     private Model(){
         modelFirebaseUsers= new ModelFirebaseUsers();
         modelSQLLite= new ModelSQLite();
         modelImageHandler = new ModelImageHandler();
+        forumListLiveData= new ForumListLiveData();
+        modelFirebaseForum = new ModelFirebaseForum();
     }
 
     public List<FeedingData> getAllFeedingData(){
@@ -49,7 +56,7 @@ public class Model {
     }
 
     public void addPost(PostData pd){
-
+        modelFirebaseForum.addPostData(pd);
     }
 
     public List<SleepingData> getAllSleepingData(){
@@ -66,6 +73,10 @@ public class Model {
 
     public void addDiaperChangingData(DiaperChangingData dcd){
         DiaperChangingSQLite.addDiaperChangingData(dcd,modelSQLLite.getWritableDatabase());
+    }
+
+    public LiveData<List<PostData>> getAllForumData() {
+        return forumListLiveData;
     }
 
     public interface SaveImageListener{

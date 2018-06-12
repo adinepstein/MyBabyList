@@ -75,6 +75,16 @@ public class RegisterFragment extends Fragment {
         boyRB = view.findViewById(R.id.register_RB_boy);
         girlRB = view.findViewById(R.id.register_RB_girl);
         babyImage= view.findViewById(R.id.user_details_IV_babyImage);
+        babyImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent takePictureIntent = new Intent(
+                        MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
         submitBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,17 +105,9 @@ public class RegisterFragment extends Fragment {
                     tran.replace(R.id.main_frame, fragment);
                     tran.addToBackStack(" ");
                     tran.commit();
-                babyImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent takePictureIntent = new Intent(
-                                MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                        }
-                    }
-                });
+
             }});
+
         updateInstanceState(savedInstanceState);
 
         return view;

@@ -4,6 +4,7 @@ package com.example.adinepst.mybabylist;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,9 @@ public class UserDetailsFragment extends Fragment {
                 ForumFragment ff=new ForumFragment();
                 FragmentTransaction tran = getActivity().getSupportFragmentManager().beginTransaction();
                 tran.add(R.id.main_frame, ff);
-                tran.addToBackStack(" ");
+                tran.addToBackStack("");
                 tran.commit();
+                Log.d("TAG", "forum was clicked");
             }
         });
 
@@ -55,8 +57,9 @@ public class UserDetailsFragment extends Fragment {
                 HistoryFragment fh = new HistoryFragment();
                 FragmentTransaction tran = getActivity().getSupportFragmentManager().beginTransaction();
                 tran.add(R.id.main_frame, fh);
-                tran.addToBackStack(" ");
+                tran.addToBackStack("");
                 tran.commit();
+
             }
         });
 
