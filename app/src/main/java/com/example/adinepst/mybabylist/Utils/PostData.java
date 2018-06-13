@@ -1,4 +1,4 @@
-package Utils;
+package com.example.adinepst.mybabylist.Utils;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
@@ -25,7 +25,7 @@ public class PostData {
         this.parentName = parentName;
         this.date = date;
         this.uploadImgUrl = uploadImgUrl;
-        this.postId= parentName + "_" + date;
+        this.postId= date + "_" + parentName;
         this.babyImageUrl=babyImageUrl;
     }
 

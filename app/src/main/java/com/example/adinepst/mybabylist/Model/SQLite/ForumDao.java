@@ -8,7 +8,7 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
-import Utils.PostData;
+import com.example.adinepst.mybabylist.Utils.PostData;
 
 @Dao
 public interface ForumDao {
@@ -20,4 +20,8 @@ public interface ForumDao {
 
     @Delete
     void delete(PostData postData);
+
+    @Query("DELETE FROM PostData")
+    public void nukeTable();
+
 }

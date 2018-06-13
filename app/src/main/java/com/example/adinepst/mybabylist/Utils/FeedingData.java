@@ -1,4 +1,4 @@
-package Utils;
+package com.example.adinepst.mybabylist.Utils;
 
 public class FeedingData extends ActivityData {
 

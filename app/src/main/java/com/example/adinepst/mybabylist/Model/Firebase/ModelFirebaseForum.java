@@ -9,10 +9,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utils.ActivityData;
-import Utils.FeedingData;
-import Utils.PostData;
-import Utils.UserData;
+import com.example.adinepst.mybabylist.Utils.PostData;
 
 public class ModelFirebaseForum {
 

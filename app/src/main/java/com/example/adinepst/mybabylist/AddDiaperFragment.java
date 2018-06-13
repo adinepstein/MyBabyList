@@ -15,10 +15,11 @@ import com.example.adinepst.mybabylist.Model.Model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
-import Utils.DiaperChangingData;
-import Utils.FeedingData;
-import Utils.UserData;
+import com.example.adinepst.mybabylist.Utils.DiaperChangingData;
+import com.example.adinepst.mybabylist.Utils.FeedingData;
+import com.example.adinepst.mybabylist.Utils.UserData;
 
 
 /**
@@ -79,6 +80,7 @@ public class AddDiaperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy hh:mm");
+                format.setTimeZone(TimeZone.getTimeZone("UTC"));
                 String dateToStr;
                 if (now.isChecked()){
                     Date curDate = new Date();

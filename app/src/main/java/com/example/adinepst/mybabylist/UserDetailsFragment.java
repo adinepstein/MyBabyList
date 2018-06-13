@@ -44,7 +44,7 @@ public class UserDetailsFragment extends Fragment {
             public void onClick(View view) {
                 ForumFragment ff=new ForumFragment();
                 FragmentTransaction tran = getActivity().getSupportFragmentManager().beginTransaction();
-                tran.add(R.id.main_frame, ff);
+                tran.replace(R.id.main_frame, ff);
                 tran.addToBackStack("");
                 tran.commit();
                 Log.d("TAG", "forum was clicked");
@@ -56,7 +56,7 @@ public class UserDetailsFragment extends Fragment {
             public void onClick(View view) {
                 HistoryFragment fh = new HistoryFragment();
                 FragmentTransaction tran = getActivity().getSupportFragmentManager().beginTransaction();
-                tran.add(R.id.main_frame, fh);
+                tran.replace(R.id.main_frame, fh);
                 tran.addToBackStack("");
                 tran.commit();
 

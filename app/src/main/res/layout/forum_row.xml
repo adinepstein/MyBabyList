@@ -63,7 +63,7 @@
         android:id="@+id/forum_row_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Date"
         app:layout_constraintStart_toStartOf="parent"

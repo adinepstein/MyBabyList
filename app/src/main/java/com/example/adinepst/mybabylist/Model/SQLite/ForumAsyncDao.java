@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
-import Utils.PostData;
+import com.example.adinepst.mybabylist.Utils.PostData;
 
 public class ForumAsyncDao {
 
@@ -17,6 +17,7 @@ public class ForumAsyncDao {
 
             @Override
             protected List<PostData> doInBackground(String... strings) {
+//                LocalDB.db.forumDao().nukeTable();
                 List<PostData> list= LocalDB.db.forumDao().getAllPosts();
                 return list;
             }

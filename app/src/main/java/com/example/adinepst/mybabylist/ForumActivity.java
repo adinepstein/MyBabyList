@@ -1,7 +1,5 @@
 package com.example.adinepst.mybabylist;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.adinepst.mybabylist.Model.Model;
@@ -18,7 +15,7 @@ import com.example.adinepst.mybabylist.Model.Model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import Utils.PostData;
+import com.example.adinepst.mybabylist.Utils.PostData;
 
 public class ForumActivity extends AppCompatActivity {
     private EditText commentET;

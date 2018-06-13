@@ -8,7 +8,7 @@ import com.example.adinepst.mybabylist.Model.SQLite.ForumAsyncDao;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utils.PostData;
+import com.example.adinepst.mybabylist.Utils.PostData;
 
 public class ForumListLiveData extends MutableLiveData<List<PostData>> {
     private ModelFirebaseForum modelFirebaseForum;

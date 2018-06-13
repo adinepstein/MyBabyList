@@ -1,4 +1,4 @@
-package Utils;
+package com.example.adinepst.mybabylist.Utils;
 
 public abstract class ActivityData {
     protected String date;

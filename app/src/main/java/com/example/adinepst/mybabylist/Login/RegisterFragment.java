@@ -1,12 +1,15 @@
-package com.example.adinepst.mybabylist;
+package com.example.adinepst.mybabylist.Login;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +17,19 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.adinepst.mybabylist.MainActivity;
 import com.example.adinepst.mybabylist.Model.Model;
 
-import Utils.SleepingData;
-import Utils.UserData;
+import com.example.adinepst.mybabylist.MyApplication;
+import com.example.adinepst.mybabylist.R;
+import com.example.adinepst.mybabylist.UserDetailsFragment;
+import com.example.adinepst.mybabylist.Utils.UserData;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -52,7 +62,8 @@ public class RegisterFragment extends Fragment {
     private Bitmap imageBitmap;
     private ImageButton babyImage;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-
+    private FirebaseAuth firebaseAuth;
+    private ProgressDialog progressDialog;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -75,6 +86,8 @@ public class RegisterFragment extends Fragment {
         boyRB = view.findViewById(R.id.register_RB_boy);
         girlRB = view.findViewById(R.id.register_RB_girl);
         babyImage= view.findViewById(R.id.user_details_IV_babyImage);
+        firebaseAuth=FirebaseAuth.getInstance();
+        progressDialog=new ProgressDialog(getActivity());
         babyImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,21 +109,43 @@ public class RegisterFragment extends Fragment {
                             //save student obj
                             imageUrl = url;
                             ud.setImageUrl(imageUrl);
-                            Model.instance.addUser(ud);
                         }
                     });}
 
-                    UserDetailsFragment fragment = new UserDetailsFragment();
-                    FragmentTransaction tran = getActivity().getSupportFragmentManager().beginTransaction();
-                    tran.replace(R.id.main_frame, fragment);
-                    tran.addToBackStack(" ");
-                    tran.commit();
-
+                    registerUser(ud);
             }});
 
         updateInstanceState(savedInstanceState);
 
         return view;
+    }
+
+    private void registerUser(final UserData ud){
+
+        String email= emailET.getText().toString().trim();
+        String password= passwordET.getText().toString().trim();
+        if(TextUtils.isEmpty(email)){
+            Toast.makeText(MyApplication.context,"Please enter email",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(password)){
+            Toast.makeText(MyApplication.context,"Please enter password",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        progressDialog.setMessage("Register user...");
+        progressDialog.show();
+
+        firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                progressDialog.dismiss();
+                if (task.isSuccessful()){
+                    Model.instance.addUser(ud);
+                    getActivity().finish();
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+                }
+            }
+        });
     }
 
     @Override

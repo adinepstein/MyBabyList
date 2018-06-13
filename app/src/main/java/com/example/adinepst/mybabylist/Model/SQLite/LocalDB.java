@@ -7,7 +7,7 @@ import android.arch.persistence.room.RoomDatabase;
 
 import com.example.adinepst.mybabylist.MyApplication;
 
-import Utils.PostData;
+import com.example.adinepst.mybabylist.Utils.PostData;
 
 @Database(entities = {PostData.class},version =1)
 abstract class LocalDBRepository extends RoomDatabase{

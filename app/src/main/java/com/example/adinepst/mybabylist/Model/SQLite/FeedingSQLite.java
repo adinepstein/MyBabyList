@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utils.FeedingData;
+import com.example.adinepst.mybabylist.Utils.FeedingData;
 
 public class FeedingSQLite {
     final static String TABLE= "FeedingData";

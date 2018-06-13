@@ -7,7 +7,7 @@ import com.example.adinepst.mybabylist.Model.Model;
 
 import java.util.List;
 
-import Utils.PostData;
+import com.example.adinepst.mybabylist.Utils.PostData;
 
 public class ForumListViewModel extends ViewModel {
     private LiveData<List<PostData>> data;

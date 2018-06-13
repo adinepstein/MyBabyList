@@ -1,4 +1,4 @@
-package Utils;
+package com.example.adinepst.mybabylist.Utils;
 
 public class UserData {
     private String name;

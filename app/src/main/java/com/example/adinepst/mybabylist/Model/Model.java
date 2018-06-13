@@ -3,22 +3,21 @@ package com.example.adinepst.mybabylist.Model;
 import android.arch.lifecycle.LiveData;
 import android.graphics.Bitmap;
 import android.util.Log;
-import android.webkit.URLUtil;
 
-import Utils.ActivityData;
-import Utils.DiaperChangingData;
+import com.example.adinepst.mybabylist.Utils.ActivityData;
+import com.example.adinepst.mybabylist.Utils.DiaperChangingData;
 
 import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseFeeding;
 import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseForum;
 import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseUsers;
 import com.example.adinepst.mybabylist.Model.SQLite.DiaperChangingSQLite;
-import Utils.FeedingData;
+import com.example.adinepst.mybabylist.Utils.FeedingData;
 import com.example.adinepst.mybabylist.Model.SQLite.FeedingSQLite;
 import com.example.adinepst.mybabylist.Model.SQLite.ModelSQLite;
 
-import Utils.PostData;
-import Utils.SleepingData;
-import Utils.UserData;
+import com.example.adinepst.mybabylist.Utils.PostData;
+import com.example.adinepst.mybabylist.Utils.SleepingData;
+import com.example.adinepst.mybabylist.Utils.UserData;
 
 import com.example.adinepst.mybabylist.Model.SQLite.SleepingSQLite;
 

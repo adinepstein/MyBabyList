@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utils.SleepingData;
+import com.example.adinepst.mybabylist.Utils.SleepingData;
 
 public class SleepingSQLite {
     final static String TABLE= "SleepingData";

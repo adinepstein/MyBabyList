@@ -7,12 +7,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-import Utils.ActivityData;
-import Utils.FeedingData;
-import Utils.UserData;
+import com.example.adinepst.mybabylist.Utils.ActivityData;
+import com.example.adinepst.mybabylist.Utils.FeedingData;
+import com.example.adinepst.mybabylist.Utils.UserData;
 
 public class ModelFirebaseFeeding {
     final static String HEADNODE ="Activity";

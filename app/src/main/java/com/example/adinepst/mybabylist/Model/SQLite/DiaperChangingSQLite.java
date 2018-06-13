@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utils.DiaperChangingData;
+import com.example.adinepst.mybabylist.Utils.DiaperChangingData;
 
 public class DiaperChangingSQLite {
     final static String TABLE= "DiaperChangingData";

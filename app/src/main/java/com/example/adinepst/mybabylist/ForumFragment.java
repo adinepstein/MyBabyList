@@ -2,7 +2,6 @@ package com.example.adinepst.mybabylist;
 
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -31,8 +30,9 @@ import com.example.adinepst.mybabylist.Model.Model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
-import Utils.PostData;
+import com.example.adinepst.mybabylist.Utils.PostData;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -129,7 +129,8 @@ public class ForumFragment extends Fragment {
                 else if (selected == R.id.addPost_RB_father)
                     parentType = "father";
 
-                SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy hh:mm");
+                SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy kk:mm:ss");
+                format.setTimeZone(TimeZone.getTimeZone("Asia/Jerusalem"));
                 Date curDate = new Date();
                 String dateToStr = format.format(curDate);
                 //TODO- add picture
@@ -142,6 +143,7 @@ public class ForumFragment extends Fragment {
 
                             pd.setUploadImgUrl(url);
                             Model.instance.addPost(pd);
+
                         }
                     });}
                 else
