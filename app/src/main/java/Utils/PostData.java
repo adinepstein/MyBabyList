@@ -3,6 +3,7 @@ package Utils;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 @Entity
 public class PostData {
@@ -19,13 +20,21 @@ public class PostData {
 
     }
 
-    public PostData(String comment, String parentName, String date, String uploadImgUrl) {
+    public PostData(String comment, String parentName, String date, String uploadImgUrl,String babyImageUrl) {
         this.comment = comment;
         this.parentName = parentName;
         this.date = date;
         this.uploadImgUrl = uploadImgUrl;
         this.postId= parentName + "_" + date;
+        this.babyImageUrl=babyImageUrl;
+    }
 
+    public String getBabyImageUrl() {
+        return babyImageUrl;
+    }
+
+    public void setBabyImageUrl(String babyImageUrl) {
+        this.babyImageUrl = babyImageUrl;
     }
 
     public String getComment() {
@@ -67,6 +76,7 @@ public class PostData {
 
     public void setUploadImgUrl(String uploadImgUrl) {
         this.uploadImgUrl = uploadImgUrl;
+        Log.d("TAG","set url image in post");
     }
 
 

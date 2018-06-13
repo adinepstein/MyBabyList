@@ -41,6 +41,7 @@ import static android.app.Activity.RESULT_OK;
  */
 public class ForumFragment extends Fragment {
 
+
     private EditText commentET;
     private RadioGroup parentRG;
     //    private RadioButton motherRB;
@@ -53,7 +54,7 @@ public class ForumFragment extends Fragment {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private Bitmap imageBitmap;
     private MyAdapter myAdapter;
-        // Required empty public constructor
+    // Required empty public constructor
 
 
     public static ForumFragment newInstance() {
@@ -111,8 +112,11 @@ public class ForumFragment extends Fragment {
                 }
             }
         });
-        postIB = view.findViewById(R.id.addPost_IB_post);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
 
+        postIB = view.findViewById(R.id.addPost_IB_post);
         postIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,13 +133,23 @@ public class ForumFragment extends Fragment {
                 Date curDate = new Date();
                 String dateToStr = format.format(curDate);
                 //TODO- add picture
-                PostData pd = new PostData(com, parentType, dateToStr, null, null);
-                Model.instance.addPost(pd);
+                final PostData pd = new PostData(com, parentType, dateToStr, null, null);
+                if (imageBitmap != null) {
+                    Model.instance.saveImage(imageBitmap, new Model.SaveImageListener() {
+                        @Override
+                        public void onDone(String url) {
+                            //save student obj
+
+                            pd.setUploadImgUrl(url);
+                            Model.instance.addPost(pd);
+                        }
+                    });}
+                else
+                    Model.instance.addPost(pd);
+                dialog.cancel();
             }
         });
-        builder.setView(view);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+
         return true;
 
 //        return super.onOptionsItemSelected(item);
@@ -152,64 +166,64 @@ public class ForumFragment extends Fragment {
         }
 
     }
-        class MyAdapter extends BaseAdapter {
+    class MyAdapter extends BaseAdapter {
 
-            @Override
-            public int getCount() {
+        @Override
+        public int getCount() {
 
-                return forumListViewModel.getData().getValue().size();
-            }
+            return forumListViewModel.getData().getValue().size();
+        }
 
-            @Override
-            public Object getItem(int i) {
-                return null;
-            }
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
 
-            @Override
-            public long getItemId(int i) {
-                return 0;
-            }
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
 
-            @Override
-            public View getView(int i, View view, ViewGroup viewGroup) {
-                if (view == null) {
-                    view = LayoutInflater.from(getActivity()).inflate(R.layout.forum_row, null);
-                    TextView date = view.findViewById(R.id.forum_row_date);
-                    TextView comment = view.findViewById(R.id.forum_row_comment);
-                    final ImageView uploadImage = view.findViewById(R.id.forum_row_addingImg);
-                    final ImageView babyImage = view.findViewById(R.id.forum_row_babyImg);
-                    TextView parentName = view.findViewById(R.id.forum_row_TV_parentName);
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            if (view == null) {
+                view = LayoutInflater.from(getActivity()).inflate(R.layout.forum_row, null);
+                TextView date = view.findViewById(R.id.forum_row_date);
+                TextView comment = view.findViewById(R.id.forum_row_comment);
+                final ImageView uploadImage = view.findViewById(R.id.forum_row_addingImg);
+                final ImageView babyImage = view.findViewById(R.id.forum_row_babyImg);
+                TextView parentName = view.findViewById(R.id.forum_row_TV_parentName);
 
-                    final PostData pd = forumListViewModel.getData().getValue().get(i);
-                    date.setText(pd.getDate());
-                    comment.setText(pd.getComment());
-                    babyImage.setImageResource(R.drawable.baby);
-                    parentName.setText(pd.getParentName());
-                    uploadImage.setTag(pd.getPostId());
-                    babyImage.setTag(pd.getPostId());
-                    if (pd.getUploadImgUrl() == null) {
-                        uploadImage.setVisibility(View.GONE);
-                    } else {
-                        Model.instance.getImage(pd.getUploadImgUrl(), new Model.GetImageListener() {
-                            @Override
-                            public void onDone(Bitmap imageBitmap) {
-                                if (pd.getPostId().equals(uploadImage.getTag()) && imageBitmap != null)
-                                    uploadImage.setImageBitmap(imageBitmap);
-                            }
-                        });
-                    }
-                    if (pd.getBabyImageUrl() != null) {
-                        Model.instance.getImage(pd.getBabyImageUrl(), new Model.GetImageListener() {
-                            @Override
-                            public void onDone(Bitmap imageBitmap) {
-                                if (pd.getPostId().equals(babyImage.getTag()) && imageBitmap != null)
-                                    babyImage.setImageBitmap(imageBitmap);
-                            }
-                        });
-                    }
+                final PostData pd = forumListViewModel.getData().getValue().get(i);
+                date.setText(pd.getDate());
+                comment.setText(pd.getComment());
+                babyImage.setImageResource(R.drawable.baby);
+                parentName.setText(pd.getParentName());
+                uploadImage.setTag(pd.getPostId());
+                babyImage.setTag(pd.getPostId());
+                if (pd.getUploadImgUrl() == null) {
+                    uploadImage.setVisibility(View.GONE);
+                } else {
+                    Model.instance.getImage(pd.getUploadImgUrl(), new Model.GetImageListener() {
+                        @Override
+                        public void onDone(Bitmap imageBitmap) {
+                            if (pd.getPostId().equals(uploadImage.getTag()) && imageBitmap != null)
+                                uploadImage.setImageBitmap(imageBitmap);
+                        }
+                    });
                 }
-                return view;
+                if (pd.getBabyImageUrl() != null) {
+                    Model.instance.getImage(pd.getBabyImageUrl(), new Model.GetImageListener() {
+                        @Override
+                        public void onDone(Bitmap imageBitmap) {
+                            if (pd.getPostId().equals(babyImage.getTag()) && imageBitmap != null)
+                                babyImage.setImageBitmap(imageBitmap);
+                        }
+                    });
+                }
             }
+            return view;
         }
     }
+}
 
