@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.adinepst.mybabylist.MainActivity;
@@ -47,14 +48,14 @@ public class RegisterFragment extends Fragment {
     private static final String ARG_EMAIL = "ARG_EMAIL";
     private static final String ARG_IMAGEURL = "ARG_IMAGEURL";
 
-    private EditText   nameET;
-    private EditText   idET;
-    private EditText   birthDateET;
-    private EditText   motherNameET;
-    private EditText   fatherNameET;
+    private TextView nameET;
+    private TextView   idET;
+    private TextView   birthDateET;
+    private TextView   motherNameET;
+    private TextView   fatherNameET;
     private RadioGroup sexRG;
-    private EditText   emailET;
-    private EditText   passwordET;
+    private TextView   emailET;
+    private TextView   passwordET;
     private String     imageUrl;
     private ImageButton submitBT;
     private RadioButton boyRB;
@@ -78,14 +79,14 @@ public class RegisterFragment extends Fragment {
         idET=view.findViewById(R.id.register_ET_id);
         birthDateET=view.findViewById(R.id.register_ET_dateBirth);
         motherNameET=view.findViewById(R.id.register_ET_mothersName);
-        fatherNameET=view.findViewById(R.id.register_ET_fatherName);
+        fatherNameET=view.findViewById(R.id.register_ET_fathersName);
         sexRG=view.findViewById(R.id.register_RG_sex);
         emailET=view.findViewById(R.id.register_ET_email);
         passwordET = view.findViewById(R.id.register_ET_password);
         submitBT= view.findViewById(R.id.register_IM_register);
         boyRB = view.findViewById(R.id.register_RB_boy);
         girlRB = view.findViewById(R.id.register_RB_girl);
-        babyImage= view.findViewById(R.id.user_details_IV_babyImage);
+        babyImage= view.findViewById(R.id.register_IB_babyImage);
         firebaseAuth=FirebaseAuth.getInstance();
         progressDialog=new ProgressDialog(getActivity());
         babyImage.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +102,8 @@ public class RegisterFragment extends Fragment {
         submitBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final UserData ud = new UserData(nameET.getText().toString(), idET.getText().toString(), getSexString(), birthDateET.getText().toString(), motherNameET.getText().toString(), fatherNameET.getText().toString(), emailET.getText().toString(), null);
+                String [] emailName=emailET.getText().toString().split("@");
+                final UserData ud = new UserData(nameET.getText().toString(), idET.getText().toString(), getSexString(), birthDateET.getText().toString(), motherNameET.getText().toString(), fatherNameET.getText().toString(), emailName[0], null);
                 if (imageBitmap != null) {
                     Model.instance.saveImage(imageBitmap, new Model.SaveImageListener() {
                         @Override
@@ -141,8 +143,8 @@ public class RegisterFragment extends Fragment {
                 progressDialog.dismiss();
                 if (task.isSuccessful()){
                     Model.instance.addUser(ud);
-                    getActivity().finish();
-                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    getActivity().getSupportFragmentManager().popBackStack();
+
                 }
             }
         });

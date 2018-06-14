@@ -73,7 +73,7 @@ public class AddFeedingFragment extends Fragment {
         submitBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy hh:mm");
+                SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy kk:mm:ss");
                 format.setTimeZone(TimeZone.getTimeZone("UTC"));
                 String dateToStr;
                 if (now.isChecked()){

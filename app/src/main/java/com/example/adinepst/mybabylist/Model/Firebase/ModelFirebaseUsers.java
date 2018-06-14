@@ -1,5 +1,6 @@
 package com.example.adinepst.mybabylist.Model.Firebase;
 
+import com.example.adinepst.mybabylist.Model.Model;
 import com.example.adinepst.mybabylist.UserDetailsFragment;
 import com.example.adinepst.mybabylist.Utils.PostData;
 import com.example.adinepst.mybabylist.Utils.UserData;
@@ -25,11 +26,9 @@ public class ModelFirebaseUsers {
 
 
 
-    public interface GetUserListener{
-        public void onSuccess(UserData ud);
-    }
 
-    public void getUser(String email, final GetUserListener listener){
+
+    public void getUser(String email, final Model.GetUserListener listener){
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(HEADNODE).child(email);
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

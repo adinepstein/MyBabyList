@@ -1,5 +1,7 @@
 package com.example.adinepst.mybabylist.Utils;
 
+import android.arch.persistence.room.Ignore;
+
 public class UserData {
     private String name;
     private String id;

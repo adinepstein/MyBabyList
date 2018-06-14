@@ -1,6 +1,8 @@
 package com.example.adinepst.mybabylist;
 
 
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,6 +15,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.adinepst.mybabylist.Model.Model;
+import com.example.adinepst.mybabylist.Utils.UserData;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.time.LocalDate;
+import java.time.Period;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -23,9 +33,12 @@ public class UserDetailsFragment extends Fragment {
     private ImageView babyImage;
     private Button forumB;
     private Button activitiesB;
+    private FirebaseAuth firebaseAuth;
+    private ProgressDialog progressDialog;
 
     public UserDetailsFragment() {
         // Required empty public constructor
+
     }
 
 
@@ -37,6 +50,11 @@ public class UserDetailsFragment extends Fragment {
         age= view.findViewById(R.id.user_details_TV_age);
         babyImage = view.findViewById(R.id.user_details_IV_babyImage);
         forumB = view.findViewById(R.id.user_details_B_forum);
+        progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setMessage("Updating...");
+
+        firebaseAuth= FirebaseAuth.getInstance();
+        getUserData();
         activitiesB= view.findViewById(R.id.user_details_B_activities);
 
         forumB.setOnClickListener(new View.OnClickListener() {
@@ -67,4 +85,38 @@ public class UserDetailsFragment extends Fragment {
 
     }
 
+    private void getUserData(){
+        progressDialog.show();
+
+        FirebaseUser user=firebaseAuth.getCurrentUser();
+        if(user!=null){
+            final String [] emailName=user.getEmail().split("@");
+            Model.instance.getUser(emailName[0], new Model.GetUserListener() {
+                @Override
+                public void onSuccess(final UserData ud) {
+                    name.setText(ud.getName());
+                    age.setText(setAge(ud.getDateOfBirth()));
+                    if (ud.getImageUrl() != null) {
+                        Model.instance.getImage(ud.getImageUrl(), new Model.GetImageListener() {
+                            @Override
+                            public void onDone(Bitmap imageBitmap) {
+                                if (imageBitmap != null)
+                                    babyImage.setImageBitmap(imageBitmap);
+                                progressDialog.dismiss();
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    }
+    private String setAge(String birthDate){
+        String [] splitDate=birthDate.split("-");
+        LocalDate birthday=LocalDate.of(Integer.parseInt(splitDate[2]),Integer.parseInt(splitDate[1]),Integer.parseInt(splitDate[0]));
+        LocalDate today= LocalDate.now();
+        Period p=Period.between(birthday,today);
+        String age= "Age- Y: " + Integer.toString(p.getYears())+ " M: " + Integer.toString(p.getMonths()) + " D: " + Integer.toString(p.getDays());
+        return age;
+    }
 }
+

@@ -49,7 +49,7 @@ public class DateEditText extends android.support.v7.widget.AppCompatEditText {
             fragment.listener = new DateDialogFragment.DateDialogFragmentListener() {
                 @Override
                 public void onDateSet(int y, int m, int d) {
-                    setText("" + d + "/" + (m+1) + "/" + y);
+                    setText("" + d + "-" + (m+1) + "-" + y);
                 }
             };
             fragment.show(((Activity)getContext()).getFragmentManager(),"");

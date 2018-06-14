@@ -1,6 +1,7 @@
 package com.example.adinepst.mybabylist.Utils;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -19,7 +20,7 @@ public class PostData {
     public PostData(){
 
     }
-
+    @Ignore
     public PostData(String comment, String parentName, String date, String uploadImgUrl,String babyImageUrl) {
         this.comment = comment;
         this.parentName = parentName;

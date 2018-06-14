@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class LoginFragment extends Fragment {
     private EditText emailET;
     private EditText passwordET;
     private Button loginBt;
-    private TextView registerBt;
+    private TextView registerTV;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
@@ -73,7 +74,7 @@ public class LoginFragment extends Fragment {
         emailET = view.findViewById(R.id.login_ET_email);
         passwordET = view.findViewById(R.id.login_ET_password);
         loginBt = view.findViewById(R.id.login_IB_login);
-        registerBt = view.findViewById(R.id.login_IB_register);
+        registerTV = view.findViewById(R.id.login_TV_register);
         firebaseAuth=FirebaseAuth.getInstance();
         progressDialog=new ProgressDialog(getActivity());
 
@@ -85,7 +86,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        registerBt.setOnClickListener(new View.OnClickListener() {
+        registerTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 RegisterFragment fragment = new RegisterFragment();
@@ -104,11 +105,15 @@ public class LoginFragment extends Fragment {
         String email= emailET.getText().toString().trim();
         String password= passwordET.getText().toString().trim();
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(MyApplication.context,"Please enter email",Toast.LENGTH_SHORT).show();
+            Toast toast=Toast.makeText(MyApplication.context,"Please enter email",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
             return;
         }
         if (TextUtils.isEmpty(password)){
-            Toast.makeText(MyApplication.context,"Please enter password",Toast.LENGTH_SHORT).show();
+            Toast toast=Toast.makeText(MyApplication.context,"Please enter password",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
             return;
         }
         progressDialog.setMessage("Login user...");
@@ -122,7 +127,14 @@ public class LoginFragment extends Fragment {
                     getActivity().finish();
                     startActivity(new Intent(getActivity(), MainActivity.class));
                 }
+                else{
+                    Toast toast=Toast.makeText(MyApplication.context,"Wrong email or password",Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
             }
+
+
         });
     }
     private void updateInstanceState(Bundle savedInstanceState ){

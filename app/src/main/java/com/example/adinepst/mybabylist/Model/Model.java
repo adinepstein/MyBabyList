@@ -53,6 +53,12 @@ public class Model {
     public void addUser(UserData ud){
         modelFirebaseUsers.addUser(ud);
     }
+    public interface GetUserListener{
+        public void onSuccess(UserData ud);
+    }
+    public void getUser(String emailSort,GetUserListener listener){
+        modelFirebaseUsers.getUser(emailSort,listener);
+    }
 
     public void addPost(PostData pd){
         modelFirebaseForum.addPostData(pd);

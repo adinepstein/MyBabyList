@@ -13,9 +13,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.adinepst.mybabylist.Model.Model;
+import com.example.adinepst.mybabylist.Utils.UserData;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     final int REQUEST_WRITE_STORAGE = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -57,40 +65,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        super.onCreateOptionsMenu(menu);
-//        getMenuInflater().inflate(R.menu.menu_add_activity,menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        boolean switched=false;
-//        Fragment fragment=null;
-//        switch (id) {
-//            case R.id.menu_MI_add_feeding:
-//                fragment = new AddFeedingFragment();
-//                switched=true;
-//                break;
-//            case R.id.menu_MI_add_sleeping:
-//                fragment = new AddSleepingFragment();
-//                switched=true;
-//                break;
-//            case R.id.menu_MI_add_diaper:
-//                fragment = new AddDiaperFragment();
-//                switched=true;
-//                break;
-//        }
-//        if (switched){
-//            FragmentTransaction tran = getSupportFragmentManager().beginTransaction();
-//            tran.replace(R.id.main_frame, fragment);
-//            tran.addToBackStack(" ");
-//            tran.commit();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
 }
