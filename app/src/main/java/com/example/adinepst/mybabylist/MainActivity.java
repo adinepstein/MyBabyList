@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Model.instance.getUserDataFromDB();
         if (savedInstanceState == null) {
             UserDetailsFragment fragment = new UserDetailsFragment();
             FragmentTransaction tran = getSupportFragmentManager().beginTransaction();
@@ -43,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
 
 
     @Override

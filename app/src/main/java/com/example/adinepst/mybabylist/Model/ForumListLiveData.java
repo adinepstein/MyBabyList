@@ -46,5 +46,6 @@ public class ForumListLiveData extends MutableLiveData<List<PostData>> {
     @Override
     protected void onInactive() {
         super.onInactive();
+        modelFirebaseForum.cancelGetAllPostData();
     }
 }

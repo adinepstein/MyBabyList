@@ -33,7 +33,6 @@ public class UserDetailsFragment extends Fragment {
     private ImageView babyImage;
     private Button forumB;
     private Button activitiesB;
-    private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
     public UserDetailsFragment() {
@@ -52,8 +51,6 @@ public class UserDetailsFragment extends Fragment {
         forumB = view.findViewById(R.id.user_details_B_forum);
         progressDialog=new ProgressDialog(getActivity());
         progressDialog.setMessage("Updating...");
-
-        firebaseAuth= FirebaseAuth.getInstance();
         getUserData();
         activitiesB= view.findViewById(R.id.user_details_B_activities);
 
@@ -88,10 +85,7 @@ public class UserDetailsFragment extends Fragment {
     private void getUserData(){
         progressDialog.show();
 
-        FirebaseUser user=firebaseAuth.getCurrentUser();
-        if(user!=null){
-            final String [] emailName=user.getEmail().split("@");
-            Model.instance.getUser(emailName[0], new Model.GetUserListener() {
+            Model.instance.getUserFromLocal( new Model.GetUserListener() {
                 @Override
                 public void onSuccess(final UserData ud) {
                     name.setText(ud.getName());
@@ -109,7 +103,7 @@ public class UserDetailsFragment extends Fragment {
                 }
             });
         }
-    }
+
     private String setAge(String birthDate){
         String [] splitDate=birthDate.split("-");
         LocalDate birthday=LocalDate.of(Integer.parseInt(splitDate[2]),Integer.parseInt(splitDate[1]),Integer.parseInt(splitDate[0]));
