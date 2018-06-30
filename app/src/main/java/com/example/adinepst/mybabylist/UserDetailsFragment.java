@@ -17,12 +17,17 @@ import android.widget.TextView;
 
 import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseUsers;
 import com.example.adinepst.mybabylist.Model.Model;
+import com.example.adinepst.mybabylist.Utils.Age;
+import com.example.adinepst.mybabylist.Utils.AgeCalculator;
 import com.example.adinepst.mybabylist.Utils.UserData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -104,13 +109,20 @@ public class UserDetailsFragment extends Fragment {
         });
     }
 
-    private String setAge(String birthDate) {
-        String[] splitDate = birthDate.split("-");
-        LocalDate birthday = LocalDate.of(Integer.parseInt(splitDate[2]), Integer.parseInt(splitDate[1]), Integer.parseInt(splitDate[0]));
-        LocalDate today = LocalDate.now();
-        Period p = Period.between(birthday, today);
-        String age = "Age- Y: " + Integer.toString(p.getYears()) + " M: " + Integer.toString(p.getMonths()) + " D: " + Integer.toString(p.getDays());
-        return age;
+    private String setAge(String birthDate)  {
+//        String[] splitDate = birthDate.split("-");
+//        LocalDate birthday = LocalDate.of(Integer.parseInt(splitDate[2]), Integer.parseInt(splitDate[1]), Integer.parseInt(splitDate[0]));
+//        LocalDate today = LocalDate.now();
+//        Period p = Period.between(birthday, today);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date bd = null;
+        try {
+            bd = sdf.parse(birthDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Age age = AgeCalculator.calculateAge(bd);
+        return age.toString();
     }
 }
 
