@@ -26,8 +26,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         setContentView(R.layout.activity_main);
-        Model.instance.getUserDataFromDB();
         if (savedInstanceState == null) {
             UserDetailsFragment fragment = new UserDetailsFragment();
             FragmentTransaction tran = getSupportFragmentManager().beginTransaction();

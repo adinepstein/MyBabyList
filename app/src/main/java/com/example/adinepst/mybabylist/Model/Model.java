@@ -23,6 +23,7 @@ import com.example.adinepst.mybabylist.Utils.UserData;
 
 import com.example.adinepst.mybabylist.Model.SQLite.SleepingSQLite;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class Model {
         forumListLiveData= new ForumListLiveData();
         modelFirebaseForum = new ModelFirebaseForum();
         firebaseAuth =FirebaseAuth.getInstance();
+
     }
 
     public List<FeedingData> getAllFeedingData(){
@@ -67,15 +69,50 @@ public class Model {
         modelFirebaseUsers.addUser(ud);
 
     }
-    public interface GetUserListener{
-        public void onSuccess(UserData ud);
+    public interface UserDataListener{
+        public void onComplete(UserData ud);
     }
 
-    public void getUserFromLocal(GetUserListener listener){
-        UserAsyncDao.getUser(listener);
+    public void getUserData(final UserDataListener listener){
+        if(userData!=null){
+            Log.d("TAG","User data 1");
+            listener.onComplete(userData);
+        }
+        else{
+            Log.d("TAG","User data 2");
+            UserAsyncDao.getUser(new UserAsyncDao.UserAsyncDaoListener<UserData>() {
+                @Override
+                public void onComplete(UserData data) {
+                    if (userData==null){
+                        getUserFromFireBase(listener);
+                    }
+                    userData=data;
+                    Log.d("TAG", userData.getEmail());
+                    listener.onComplete(data);
+
+                }
+            });
+
+        }
+
     }
-    public void getUserFromFireBase(String emailSort,GetUserListener listener){
-        modelFirebaseUsers.getUser(emailSort,listener);
+    private void getUserFromFireBase(final UserDataListener listener){
+        final String sortEmail= firebaseAuth.getCurrentUser().getEmail().split("@")[0];
+        modelFirebaseUsers.getUser(sortEmail, new ModelFirebaseUsers.FirebaseUserListener() {
+            @Override
+            public void onComplete(UserData ud) {
+                if(ud!=null){
+                    Log.d("TAG","User data 3");
+                    userData=ud;
+                    listener.onComplete(ud);
+                }
+                else{
+                    Log.d("TAG","User data 4");
+                    Log.d("TAG","NO sort EMail "+ sortEmail);
+                }
+            }
+        });
+
     }
 
 
@@ -120,23 +157,6 @@ public class Model {
         modelImageHandler.getImage(url,listener);
     }
 
-    public UserData getUserData() {
-        return userData;
-    }
 
-    public void setUserData(UserData userData) {
-        this.userData = userData;
-    }
 
-    public void getUserDataFromDB() {
-        String s= firebaseAuth.getCurrentUser().getEmail();
-        String[] strings= s.split("@");
-        getUserFromFireBase(strings[0], new GetUserListener() {
-            @Override
-            public void onSuccess(UserData ud) {
-               setUserData(ud);
-            }
-        });
-        this.userData = userData;
-    }
 }

@@ -4,6 +4,7 @@ import com.example.adinepst.mybabylist.Model.Model;
 import com.example.adinepst.mybabylist.UserDetailsFragment;
 import com.example.adinepst.mybabylist.Utils.PostData;
 import com.example.adinepst.mybabylist.Utils.UserData;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,17 +25,19 @@ public class ModelFirebaseUsers {
 
 
 
+public interface FirebaseUserListener{
+         void onComplete(UserData ud);
+}
 
 
 
-
-    public void getUser(String email, final Model.GetUserListener listener){
+    public void getUser(String email, final FirebaseUserListener listener){
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(HEADNODE).child(email);
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserData ud= dataSnapshot.getValue(UserData.class);
-                listener.onSuccess(ud);
+                listener.onComplete(ud);
             }
 
             @Override

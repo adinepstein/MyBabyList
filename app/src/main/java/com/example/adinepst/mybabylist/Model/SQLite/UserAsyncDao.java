@@ -1,6 +1,7 @@
 package com.example.adinepst.mybabylist.Model.SQLite;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.adinepst.mybabylist.Model.Model;
 import com.example.adinepst.mybabylist.Utils.PostData;
@@ -14,20 +15,20 @@ public class UserAsyncDao {
         void onComplete(T data);
     }
 
-    static public void getUser(final Model.GetUserListener listener){
+    static public void getUser(final UserAsyncDaoListener<UserData> listener){
         class MyAsyncTask extends AsyncTask<String,String,UserData>{
 
             @Override
             protected UserData doInBackground(String... strings) {
-//                LocalDB.db.userDao().nukeTable();
-                UserData ud= LocalDB.db.userDao().getUser();
+//               LocalDB.db.userDao().nukeTable();
+                UserData ud= LocalDB.db.userDao().getUser().get(0);
                 return ud;
             }
 
             @Override
             protected void onPostExecute(UserData ud) {
                 super.onPostExecute(ud);
-                listener.onSuccess(ud);
+                listener.onComplete(ud);
             }
         }
         MyAsyncTask task= new MyAsyncTask();

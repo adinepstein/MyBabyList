@@ -8,8 +8,9 @@ import android.arch.persistence.room.RoomDatabase;
 import com.example.adinepst.mybabylist.MyApplication;
 
 import com.example.adinepst.mybabylist.Utils.PostData;
+import com.example.adinepst.mybabylist.Utils.UserData;
 
-@Database(entities = {PostData.class},version =1)
+@Database(entities = {PostData.class, UserData.class},version =2)
 abstract class LocalDBRepository extends RoomDatabase{
     public abstract ForumDao forumDao();
     public abstract UserDao userDao();
