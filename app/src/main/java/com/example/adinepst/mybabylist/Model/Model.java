@@ -4,12 +4,11 @@ import android.arch.lifecycle.LiveData;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.example.adinepst.mybabylist.Model.SQLite.LocalDB;
 import com.example.adinepst.mybabylist.Model.SQLite.UserAsyncDao;
 import com.example.adinepst.mybabylist.Utils.ActivityData;
 import com.example.adinepst.mybabylist.Utils.DiaperChangingData;
 
-import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseFeeding;
+import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseSleeping;
 import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseForum;
 import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseUsers;
 import com.example.adinepst.mybabylist.Model.SQLite.DiaperChangingSQLite;
@@ -23,7 +22,6 @@ import com.example.adinepst.mybabylist.Utils.UserData;
 
 import com.example.adinepst.mybabylist.Model.SQLite.SleepingSQLite;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -56,7 +54,7 @@ public class Model {
     public void addActivityData(ActivityData ad, UserData ud){
         Log.d("Tag", "model- add feeding data");
 //        FeedingSQLite.addActivityData(fd,modelSQLLite.getWritableDatabase());
-        ModelFirebaseFeeding.addActivityData(ad,ud);
+        ModelFirebaseSleeping.addActivityData(ad,ud);
     }
     public void addUser(UserData ud){
         UserAsyncDao.insertUser(ud, new UserAsyncDao.UserAsyncDaoListener<Boolean>() {

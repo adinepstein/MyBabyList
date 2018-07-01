@@ -10,10 +10,11 @@ import com.example.adinepst.mybabylist.MyApplication;
 import com.example.adinepst.mybabylist.Utils.PostData;
 import com.example.adinepst.mybabylist.Utils.UserData;
 
-@Database(entities = {PostData.class, UserData.class},version =2)
+@Database(entities = {PostData.class, UserData.class},version =3)
 abstract class LocalDBRepository extends RoomDatabase{
     public abstract ForumDao forumDao();
     public abstract UserDao userDao();
+    public abstract SleepingDao sleepingDao();
 }
 
 public class LocalDB {

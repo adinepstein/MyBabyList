@@ -1,5 +1,10 @@
 package com.example.adinepst.mybabylist.Utils;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+@Entity
 public class SleepingData extends ActivityData {
     private String endDate;
     private String endTime;
@@ -33,4 +38,16 @@ public class SleepingData extends ActivityData {
     }
 
     public String getActivityType(){return activityType;}
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public static void setACTIVITYTYPE(String ACTIVITYTYPE) {
+        SleepingData.ACTIVITYTYPE = ACTIVITYTYPE;
+    }
 }

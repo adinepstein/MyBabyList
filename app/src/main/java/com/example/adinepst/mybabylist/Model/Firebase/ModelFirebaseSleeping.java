@@ -1,5 +1,6 @@
 package com.example.adinepst.mybabylist.Model.Firebase;
 
+import com.example.adinepst.mybabylist.Utils.SleepingData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,32 +14,42 @@ import com.example.adinepst.mybabylist.Utils.ActivityData;
 import com.example.adinepst.mybabylist.Utils.FeedingData;
 import com.example.adinepst.mybabylist.Utils.UserData;
 
-public class ModelFirebaseFeeding {
+public class ModelFirebaseSleeping {
+
+
+
     final static String HEADNODE ="Activity";
+    final static String CHILDNODE ="Sleeping";
+
 
     static private ValueEventListener eventListener;
 
-    static public void addActivityData(ActivityData ad, UserData ud) {
-        DatabaseReference dbRef= FirebaseDatabase.getInstance().getReference().child(HEADNODE).child(ud.getId());
+    public void addActivityData(ActivityData ad, UserData ud) {
+        DatabaseReference dbRef= FirebaseDatabase.getInstance().getReference().child(HEADNODE).child(ud.getEmail()).child(CHILDNODE);
         dbRef.child(ad.getDate()).child(ad.getTime()).setValue(ad);
     }
 
-    interface GetAllDataListener{
-        public void onSuccess(List<FeedingData> feedingDataList);
+    public void cancelGetAllData(UserData userData){
+        DatabaseReference dr= FirebaseDatabase.getInstance().getReference().child(HEADNODE).child(userData.getEmail()).child(CHILDNODE);
+        dr.removeEventListener(eventListener);
     }
 
-    static public void getAllFeedingData(final GetAllDataListener listener){
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(HEADNODE);
+    public interface GetAllDataListener{
+        public void onSuccess(List<SleepingData> sleepingDataList);
+    }
+
+    public void getAllData(UserData ud, final GetAllDataListener listener){
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(HEADNODE).child(ud.getEmail()).child(CHILDNODE);
         eventListener = dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<FeedingData> fdList = new ArrayList<>();
+                List<SleepingData> sdList = new ArrayList<>();
 
                 for (DataSnapshot fdSnapshot: dataSnapshot.getChildren()) {
-                      FeedingData fd= fdSnapshot.getValue(FeedingData.class);
-                    fdList.add(fd);
+                    SleepingData sd= fdSnapshot.getValue(SleepingData.class);
+                    sdList.add(sd);
                 }
-                listener.onSuccess(fdList);
+                listener.onSuccess(sdList);
             }
 
             @Override
