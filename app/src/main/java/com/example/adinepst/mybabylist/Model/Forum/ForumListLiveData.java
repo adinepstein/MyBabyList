@@ -1,13 +1,11 @@
-package com.example.adinepst.mybabylist.Model;
+package com.example.adinepst.mybabylist.Model.Forum;
 
 import android.arch.lifecycle.MutableLiveData;
-
-import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseForum;
-import com.example.adinepst.mybabylist.Model.SQLite.ForumAsyncDao;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.adinepst.mybabylist.Model.SQLite.ForumAsyncDao;
 import com.example.adinepst.mybabylist.Utils.PostData;
 
 public class ForumListLiveData extends MutableLiveData<List<PostData>> {

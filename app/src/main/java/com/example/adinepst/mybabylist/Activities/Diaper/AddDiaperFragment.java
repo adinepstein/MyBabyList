@@ -1,4 +1,4 @@
-package com.example.adinepst.mybabylist;
+package com.example.adinepst.mybabylist.Activities.Diaper;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,25 +11,19 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+
 import com.example.adinepst.mybabylist.Model.Model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import com.example.adinepst.mybabylist.R;
 import com.example.adinepst.mybabylist.Utils.DiaperChangingData;
 import com.example.adinepst.mybabylist.Utils.FeedingData;
-import com.example.adinepst.mybabylist.Utils.UserData;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AddDiaperFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AddDiaperFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AddDiaperFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,11 +42,10 @@ public class AddDiaperFragment extends Fragment {
     private CheckBox now;
     private EditText comment;
 
-    public AddDiaperFragment() {
-        // Required empty public constructor
+    public static AddDiaperFragment newInstance() {
+        AddDiaperFragment fragment = new AddDiaperFragment();
+        return fragment;
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +73,7 @@ public class AddDiaperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy hh:mm");
-                format.setTimeZone(TimeZone.getTimeZone("UTC"));
+                format.setTimeZone(TimeZone.getTimeZone("Asia/Jerusalem"));
                 String dateToStr;
                 if (now.isChecked()){
                     Date curDate = new Date();
@@ -98,8 +91,8 @@ public class AddDiaperFragment extends Fragment {
                 String com=comment.getText().toString();
                 String [] dateSplit=dateToStr.split(" ");
                 DiaperChangingData dcd= new DiaperChangingData(dateSplit[0],dateSplit[1],diaperType,com);
-                UserData ud= new UserData("bb","22222","bb","bb","bb","bb","bb","bb");
-                Model.instance.addActivityData(dcd,ud);
+
+                Model.instance.addDiaperData(dcd);
                 getActivity().getSupportFragmentManager().popBackStack();
 
             }

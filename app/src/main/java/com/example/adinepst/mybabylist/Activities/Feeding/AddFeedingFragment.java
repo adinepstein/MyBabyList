@@ -1,4 +1,4 @@
-package com.example.adinepst.mybabylist;
+package com.example.adinepst.mybabylist.Activities.Feeding;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,18 +15,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import com.example.adinepst.mybabylist.R;
 import com.example.adinepst.mybabylist.Utils.FeedingData;
-import com.example.adinepst.mybabylist.Utils.UserData;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AddFeedingFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AddFeedingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AddFeedingFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,6 +35,11 @@ public class AddFeedingFragment extends Fragment {
     private EditText time;
     private CheckBox now;
     private EditText comment;
+
+    public static AddFeedingFragment newInstance() {
+        AddFeedingFragment fragment = new AddFeedingFragment();
+        return fragment;
+    }
 
     public AddFeedingFragment() {
         // Required empty public constructor
@@ -74,9 +72,10 @@ public class AddFeedingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy kk:mm:ss");
-                format.setTimeZone(TimeZone.getTimeZone("UTC"));
+                format.setTimeZone(TimeZone.getTimeZone("Asia/Jerusalem"));
                 String dateToStr;
                 if (now.isChecked()){
+
                     Date curDate = new Date();
                     dateToStr= format.format(curDate);
                 }
@@ -86,8 +85,7 @@ public class AddFeedingFragment extends Fragment {
                 String [] dateSplit= dateToStr.split(" ");
                 double amt= Double.parseDouble(amount.getText().toString());
                 FeedingData fd= new FeedingData(dateSplit[0],dateSplit[1],amt,comment.getText().toString());
-                UserData ud= new UserData("aa","123456","aa","aa","aa","aa","aa","aa");
-                Model.instance.addActivityData(fd,ud);
+                Model.instance.addFeedingData(fd);
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });

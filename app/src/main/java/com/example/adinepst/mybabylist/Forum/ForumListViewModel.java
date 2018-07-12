@@ -1,4 +1,4 @@
-package com.example.adinepst.mybabylist;
+package com.example.adinepst.mybabylist.Forum;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;

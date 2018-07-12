@@ -1,4 +1,4 @@
-package com.example.adinepst.mybabylist;
+package com.example.adinepst.mybabylist.Forum;
 
 
 import android.arch.lifecycle.Observer;
@@ -32,6 +32,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import com.example.adinepst.mybabylist.R;
 import com.example.adinepst.mybabylist.Utils.PostData;
 
 import static android.app.Activity.RESULT_OK;
@@ -125,16 +126,16 @@ public class ForumFragment extends Fragment {
                 //TODO
                 parentType = null;
                 if (selected == R.id.addPost_RB_mother)
-                    parentType = "mother";
+                    parentType = Model.instance.getUserData().getMotherName();
                 else if (selected == R.id.addPost_RB_father)
-                    parentType = "father";
+                    parentType = Model.instance.getUserData().getMotherName();
 
                 SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy kk:mm:ss");
                 format.setTimeZone(TimeZone.getTimeZone("Asia/Jerusalem"));
                 Date curDate = new Date();
                 String dateToStr = format.format(curDate);
                 //TODO- add picture
-                final PostData pd = new PostData(com, parentType, dateToStr, null, null);
+                final PostData pd = new PostData(com, parentType, dateToStr, null, Model.instance.getUserData().getImageUrl());
                 if (imageBitmap != null) {
                     Model.instance.saveImage(imageBitmap, new Model.SaveImageListener() {
                         @Override

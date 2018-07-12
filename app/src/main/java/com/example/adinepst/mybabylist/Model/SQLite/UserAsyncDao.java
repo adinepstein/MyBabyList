@@ -21,8 +21,11 @@ public class UserAsyncDao {
             @Override
             protected UserData doInBackground(String... strings) {
 //               LocalDB.db.userDao().nukeTable();
-                UserData ud= LocalDB.db.userDao().getUser().get(0);
-                return ud;
+                if(LocalDB.db.userDao().getUser().size()>0){
+                    UserData ud= LocalDB.db.userDao().getUser().get(0);
+                    return ud;
+                }
+                return null;
             }
 
             @Override

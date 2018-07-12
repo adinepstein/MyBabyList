@@ -1,4 +1,4 @@
-package com.example.adinepst.mybabylist;
+package com.example.adinepst.mybabylist.Activities;
 
 
 import android.os.Bundle;
@@ -11,8 +11,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.adinepst.mybabylist.Activities.Diaper.AddDiaperFragment;
+import com.example.adinepst.mybabylist.Activities.Diaper.DiaperDetailsFragment;
+import com.example.adinepst.mybabylist.Activities.Feeding.AddFeedingFragment;
+import com.example.adinepst.mybabylist.Activities.Feeding.FeedingDetailsFragment;
+import com.example.adinepst.mybabylist.Activities.Sleeping.AddSleepingFragment;
+import com.example.adinepst.mybabylist.Activities.Sleeping.SleepingDetailsFragment;
+import com.example.adinepst.mybabylist.R;
+import com.example.adinepst.mybabylist.Utils.HistoryData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +33,9 @@ import java.util.List;
 public class HistoryFragment extends Fragment {
 
     private HistoryListAdapter adapter;
+    private Button sleepingDetailBT;
+    private Button feedingDetailBT;
+    private Button diaperDetailBT;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -34,11 +47,44 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.history_layout, container, false);
         ListView list= view.findViewById(R.id.history_LV_list);
+        sleepingDetailBT= view.findViewById(R.id.history_B_sleepingDetails);
+        feedingDetailBT = view.findViewById(R.id.history_B_foodDetails);
+        diaperDetailBT = view.findViewById(R.id.history_B_DiapersDetails);
         adapter = new HistoryListAdapter();
         for(int i=0; i<50; i++){
             HistoryData h= new HistoryData(""+ i+ "/01/18",""+i, "150." + i, "15."+ i, ""+i, ""+ i);
             adapter.data.add(h);
         }
+        sleepingDetailBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment=new SleepingDetailsFragment();
+                FragmentTransaction tran = getActivity().getSupportFragmentManager().beginTransaction();
+                tran.replace(R.id.main_frame, fragment);
+                tran.addToBackStack(" ");
+                tran.commit();
+            }
+        });
+        feedingDetailBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment=new FeedingDetailsFragment();
+                FragmentTransaction tran = getActivity().getSupportFragmentManager().beginTransaction();
+                tran.replace(R.id.main_frame, fragment);
+                tran.addToBackStack(" ");
+                tran.commit();
+            }
+        });
+        diaperDetailBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment=new DiaperDetailsFragment();
+                FragmentTransaction tran = getActivity().getSupportFragmentManager().beginTransaction();
+                tran.replace(R.id.main_frame, fragment);
+                tran.addToBackStack(" ");
+                tran.commit();
+            }
+        });
         list.setAdapter(adapter);
         setHasOptionsMenu(true);
         return view;
@@ -108,39 +154,39 @@ public class HistoryFragment extends Fragment {
             }
             HistoryData hd= data.get(i);
             TextView date= view.findViewById(R.id.history_row_day);
-            date.setText(hd.day);
+            date.setText(hd.getDay());
             TextView numFeading = view.findViewById(R.id.history_row_numOfFood);
-            numFeading.setText(hd.numOfFeadings);
+            numFeading.setText(hd.getNumOfFeadings());
             TextView avgAmount= view.findViewById(R.id.history_row_avgAmount);
-            avgAmount.setText(hd.avgAmount);
+            avgAmount.setText(hd.getAvgAmount());
             TextView hoursSleeping = view.findViewById(R.id.history_row_hoursPerDaySleeping);
-            hoursSleeping.setText(hd.sleepingHours);
+            hoursSleeping.setText(hd.getSleepingHours());
             TextView numUrine= view.findViewById(R.id.history_row_numUrine);
-            numUrine.setText(hd.numofUrines);
+            numUrine.setText(hd.getNumofUrines());
             TextView numPoop = view.findViewById(R.id.history_row_numPoop);
-            numPoop.setText(hd.numOfPoops);
+            numPoop.setText(hd.getNumOfPoops());
 
             return view;
 
         }
     }
 
-    public class HistoryData{
-        String day;
-        String numOfFeadings;
-        String avgAmount;
-        String sleepingHours;
-        String numOfPoops;
-        String numofUrines;
-
-        public HistoryData(String day, String numOfFeadings, String avgAmount, String sleepingHours, String numOfPoops, String numofUrines) {
-            this.day = day;
-            this.numOfFeadings = numOfFeadings;
-            this.avgAmount = avgAmount;
-            this.sleepingHours = sleepingHours;
-            this.numOfPoops = numOfPoops;
-            this.numofUrines = numofUrines;
-        }
-    }
+//    public class HistoryData{
+//        String day;
+//        String numOfFeadings;
+//        String avgAmount;
+//        String sleepingHours;
+//        String numOfPoops;
+//        String numofUrines;
+//
+//        public HistoryData(String day, String numOfFeadings, String avgAmount, String sleepingHours, String numOfPoops, String numofUrines) {
+//            this.day = day;
+//            this.numOfFeadings = numOfFeadings;
+//            this.avgAmount = avgAmount;
+//            this.sleepingHours = sleepingHours;
+//            this.numOfPoops = numOfPoops;
+//            this.numofUrines = numofUrines;
+//        }
+//    }
 
 }

@@ -140,9 +140,10 @@ public class RegisterFragment extends Fragment {
         firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                progressDialog.dismiss();
+
                 if (task.isSuccessful()){
                     Model.instance.addUser(ud);
+                    progressDialog.dismiss();
                     getActivity().getSupportFragmentManager().popBackStack();
 
                 }

@@ -11,22 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseUsers;
+import com.example.adinepst.mybabylist.Activities.HistoryFragment;
+import com.example.adinepst.mybabylist.Forum.ForumFragment;
 import com.example.adinepst.mybabylist.Model.Model;
 import com.example.adinepst.mybabylist.Utils.Age;
 import com.example.adinepst.mybabylist.Utils.AgeCalculator;
 import com.example.adinepst.mybabylist.Utils.UserData;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.Date;
 
 /**
@@ -57,6 +53,7 @@ public class UserDetailsFragment extends Fragment {
         forumB = view.findViewById(R.id.user_details_B_forum);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Updating...");
+        progressDialog.show();
         setUserData();
         activitiesB = view.findViewById(R.id.user_details_B_activities);
 

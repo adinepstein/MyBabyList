@@ -10,20 +10,20 @@ public class AgeCalculator {
         int years = 0;
         int months = 0;
         int days = 0;
-        //create calendar object for birth day
+
         Calendar birthDay = Calendar.getInstance();
         birthDay.setTimeInMillis(birthDate.getTime());
-        //create calendar object for current day
+
         long currentTime = System.currentTimeMillis();
         Calendar now = Calendar.getInstance();
         now.setTimeInMillis(currentTime);
-        //Get difference between years
+
         years = now.get(Calendar.YEAR) - birthDay.get(Calendar.YEAR);
         int currMonth = now.get(Calendar.MONTH) + 1;
         int birthMonth = birthDay.get(Calendar.MONTH) + 1;
-        //Get difference between months
+
         months = currMonth - birthMonth;
-        //if month difference is in negative then reduce years by one and calculate the number of months.
+
         if (months < 0) {
             years--;
             months = 12 - birthMonth + currMonth;
@@ -33,7 +33,7 @@ public class AgeCalculator {
             years--;
             months = 11;
         }
-        //Calculate the days
+
         if (now.get(Calendar.DATE) > birthDay.get(Calendar.DATE))
             days = now.get(Calendar.DATE) - birthDay.get(Calendar.DATE);
         else if (now.get(Calendar.DATE) < birthDay.get(Calendar.DATE)) {
@@ -47,7 +47,7 @@ public class AgeCalculator {
                 months = 0;
             }
         }
-        //Create new Age object
+
         return new Age(days, months, years);
     }
 }

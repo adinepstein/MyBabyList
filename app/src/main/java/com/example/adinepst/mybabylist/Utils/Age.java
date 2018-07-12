@@ -35,6 +35,6 @@ public class Age {
     @Override
     public String toString()
     {
-        return years + " Years, " + months + " Months, " + days + " Days";
+        return years + " Y, " + months + " M, " + days + " D";
     }
 }

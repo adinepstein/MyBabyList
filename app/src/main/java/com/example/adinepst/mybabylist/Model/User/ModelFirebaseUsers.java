@@ -1,4 +1,4 @@
-package com.example.adinepst.mybabylist.Model.Firebase;
+package com.example.adinepst.mybabylist.Model.User;
 
 import com.example.adinepst.mybabylist.Model.Model;
 import com.example.adinepst.mybabylist.UserDetailsFragment;

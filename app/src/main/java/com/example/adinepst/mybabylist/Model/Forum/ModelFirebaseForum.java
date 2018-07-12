@@ -1,4 +1,4 @@
-package com.example.adinepst.mybabylist.Model.Firebase;
+package com.example.adinepst.mybabylist.Model.Forum;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

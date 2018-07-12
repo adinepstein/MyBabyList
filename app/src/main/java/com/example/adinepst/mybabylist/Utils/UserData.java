@@ -20,6 +20,7 @@ public class UserData {
 
     public UserData(){}
 
+    @Ignore
     public UserData(String name, String id, String sex, String dateOfBirth, String motherName, String fatherName, String email, String imageUrl) {
         this.name = name;
         this.id = id;

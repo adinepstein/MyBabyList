@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
+import com.example.adinepst.mybabylist.Model.SQLite.LocalDB;
 import com.example.adinepst.mybabylist.Utils.PostData;
 
 public class ForumAsyncDao {
@@ -54,5 +55,26 @@ public class ForumAsyncDao {
         }
         MyAsyncTask task= new MyAsyncTask();
         task.execute(pdList);
+    }
+
+    static public void insertData(final PostData pd,final ForumAsyncDaoListener<Boolean> listener){
+
+        class MyAsyncTask extends AsyncTask<PostData,Boolean,Boolean>{
+
+            @Override
+            protected Boolean doInBackground(PostData... postData) {
+                LocalDB.db.forumDao().insertAll(postData);
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                super.onPostExecute(success);
+                listener.onComplete(success);
+            }
+        }
+
+        MyAsyncTask task= new MyAsyncTask();
+        task.execute(pd);
     }
 }

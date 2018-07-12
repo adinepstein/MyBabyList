@@ -1,4 +1,4 @@
-package com.example.adinepst.mybabylist;
+package com.example.adinepst.mybabylist.Activities.Sleeping;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,18 +10,11 @@ import android.widget.ImageButton;
 
 import com.example.adinepst.mybabylist.Model.Model;
 
+import com.example.adinepst.mybabylist.R;
 import com.example.adinepst.mybabylist.Utils.SleepingData;
-import com.example.adinepst.mybabylist.Utils.UserData;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AddSleepingFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AddSleepingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AddSleepingFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,8 +31,9 @@ public class AddSleepingFragment extends Fragment {
     private EditText time;
     private EditText comment;
 
-    public AddSleepingFragment() {
-        // Required empty public constructor
+    public static AddSleepingFragment newInstance() {
+        AddSleepingFragment fragment = new AddSleepingFragment();
+        return fragment;
     }
 
 
@@ -71,8 +65,7 @@ public class AddSleepingFragment extends Fragment {
                 String endTimeS = endTime.getText().toString();
                 String com= comment.getText().toString();
                 SleepingData sd= new SleepingData(startDate,startTime,endDateS,endTimeS,com);
-                UserData ud= new UserData("aa","123456","aa","aa","aa","aa","aa","aa");
-                Model.instance.addActivityData(sd,ud);
+                Model.instance.addSleepingData(sd);
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });

@@ -1,12 +1,9 @@
-package com.example.adinepst.mybabylist.Model;
+package com.example.adinepst.mybabylist.Model.Sleeping;
 
 import android.arch.lifecycle.MutableLiveData;
 
-import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseForum;
-import com.example.adinepst.mybabylist.Model.Firebase.ModelFirebaseSleeping;
-import com.example.adinepst.mybabylist.Model.SQLite.ForumAsyncDao;
+import com.example.adinepst.mybabylist.Model.Sleeping.ModelFirebaseSleeping;
 import com.example.adinepst.mybabylist.Model.SQLite.SleepingAsyncDao;
-import com.example.adinepst.mybabylist.Utils.PostData;
 import com.example.adinepst.mybabylist.Utils.SleepingData;
 import com.example.adinepst.mybabylist.Utils.UserData;
 
@@ -26,6 +23,7 @@ public class SleepingListLiveData extends MutableLiveData<List<SleepingData>> {
     @Override
     protected void onActive() {
         super.onActive();
+
         SleepingAsyncDao.getAll(new SleepingAsyncDao.SleepingAsyncDaoListener<List<SleepingData>>() {
             @Override
             public void onComplete(List<SleepingData> data) {

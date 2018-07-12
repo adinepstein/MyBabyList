@@ -57,7 +57,7 @@
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/sleeping_ET_date" />
 
-    <EditText
+    <com.example.adinepst.mybabylist.Utils.DateEditText
         android:id="@+id/feading_ET_date"
         android:layout_width="107dp"
         android:layout_height="wrap_content"

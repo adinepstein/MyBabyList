@@ -18,7 +18,7 @@ public class SleepingAsyncDao {
 
             @Override
             protected List<SleepingData> doInBackground(String... strings) {
-//                LocalDB.db.forumDao().nukeTable();
+//               LocalDB.db.sleepingDao().nukeTable();
                 List<SleepingData> list= LocalDB.db.sleepingDao().geAllData();
                 return list;
             }
@@ -55,5 +55,26 @@ public class SleepingAsyncDao {
         }
         MyAsyncTask task= new MyAsyncTask();
         task.execute(sdList);
+    }
+
+    static public void insertData(final SleepingData sd,final SleepingAsyncDaoListener<Boolean> listener){
+
+        class MyAsyncTask extends AsyncTask<SleepingData,Boolean,Boolean>{
+
+            @Override
+            protected Boolean doInBackground(SleepingData... sleepingData) {
+                LocalDB.db.sleepingDao().insertAll(sleepingData);
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                super.onPostExecute(success);
+                listener.onComplete(success);
+            }
+        }
+
+        MyAsyncTask task= new MyAsyncTask();
+        task.execute(sd);
     }
 }
