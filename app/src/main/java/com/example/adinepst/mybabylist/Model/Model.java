@@ -4,11 +4,14 @@ import android.arch.lifecycle.LiveData;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.example.adinepst.mybabylist.Activities.History.HistoryData;
 import com.example.adinepst.mybabylist.Model.Diaper.DiaperListLiveData;
 import com.example.adinepst.mybabylist.Model.Diaper.ModelFirebaseDiaper;
 import com.example.adinepst.mybabylist.Model.Feeding.FeedingListLiveData;
 import com.example.adinepst.mybabylist.Model.Feeding.ModelFirebaseFeeding;
 import com.example.adinepst.mybabylist.Model.Forum.ForumListLiveData;
+import com.example.adinepst.mybabylist.Model.History.HistoryListLiveData;
+import com.example.adinepst.mybabylist.Model.History.ModelFirebaseHistory;
 import com.example.adinepst.mybabylist.Model.SQLite.DiaperAsyncDao;
 import com.example.adinepst.mybabylist.Model.SQLite.FeedingAsyncDao;
 import com.example.adinepst.mybabylist.Model.SQLite.ForumAsyncDao;
@@ -44,8 +47,10 @@ public class Model {
     private ModelFirebaseSleeping modelFirebaseSleeping;
     private ModelFirebaseFeeding modelFirebaseFeeding;
     private ModelFirebaseDiaper modelFirebaseDiaper;
+    private ModelFirebaseHistory modelFirebaseHistory;
     private FeedingListLiveData feedingListLiveData;
     private DiaperListLiveData diaperListLiveData;
+    private HistoryListLiveData historyListLiveData;
 
 
 
@@ -58,8 +63,14 @@ public class Model {
         firebaseAuth = FirebaseAuth.getInstance();
         modelFirebaseFeeding = new ModelFirebaseFeeding();
         modelFirebaseDiaper = new ModelFirebaseDiaper();
+        modelFirebaseHistory = new ModelFirebaseHistory();
 
 
+    }
+
+    public LiveData<List<HistoryData>> getAllHistoryData() {
+
+        return historyListLiveData;
     }
 
     public LiveData<List<FeedingData>> getAllFeedingData() {
@@ -80,6 +91,7 @@ public class Model {
             }
         });
         modelFirebaseSleeping.addSleepingData(sd, userData);
+        modelFirebaseHistory.addSleepingToHistory(sd,userData);
     }
 
     public void addFeedingData(FeedingData fd) {
@@ -90,6 +102,7 @@ public class Model {
             }
         });
         modelFirebaseFeeding.addFeedingData(fd, userData);
+        modelFirebaseHistory.addFeedingToHistory(fd,userData);
     }
 
     public void addDiaperData(DiaperChangingData dd) {
@@ -100,6 +113,7 @@ public class Model {
             }
         });
         modelFirebaseDiaper.addDiaperData(dd, userData);
+        modelFirebaseHistory.addDiaperToHistory(dd,userData);
     }
 
 
@@ -120,51 +134,23 @@ public class Model {
     }
 
     public void getUserData(final UserDataListener listener) {
-//        if (userData != null) {
-//            listener.onComplete(userData);
-//        } else {
-//            UserAsyncDao.getUser(new UserAsyncDao.UserAsyncDaoListener<UserData>() {
-//                @Override
-//                public void onComplete(UserData data) {
-//                    if (data == null) {
-//                        getUserFromFireBase(listener);
-//                    }
-//                    else{
-//                        userData = data;
-//                        sleepingListLiveData= new SleepingListLiveData(data);
-//                        feedingListLiveData = new FeedingListLiveData(data);
-//                        diaperListLiveData = new DiaperListLiveData(data);
-//                        listener.onComplete(data);
-//                    }
-//
-//
-//                }
-//            });
-//
-//        }
-        getUserFromFireBase(listener);
-    }
-
-    private void getUserFromFireBase(final UserDataListener listener) {
-        final String sortEmail = firebaseAuth.getCurrentUser().getEmail().split("@")[0];
+       final String sortEmail = firebaseAuth.getCurrentUser().getEmail().split("@")[0];
         modelFirebaseUsers.getUser(sortEmail, new ModelFirebaseUsers.FirebaseUserListener() {
             @Override
             public void onComplete(UserData ud) {
                 if (ud != null) {
-
                     userData = ud;
                     feedingListLiveData = new FeedingListLiveData(ud);
                     sleepingListLiveData= new SleepingListLiveData(ud);
                     diaperListLiveData = new DiaperListLiveData(ud);
+                    historyListLiveData =new HistoryListLiveData(ud);
                     listener.onComplete(ud);
                 } else {
 
                 }
             }
         });
-
     }
-
 
     public void addPost(PostData pd) {
         ForumAsyncDao.insertData(pd, new ForumAsyncDao.ForumAsyncDaoListener<Boolean>() {
@@ -180,19 +166,6 @@ public class Model {
 
         return sleepingListLiveData;
     }
-
-    public void addSleepingDataSQLite(SleepingData sd) {
-//        SleepingSQLite.addSleepingData(sd, modelSQLLite.getWritableDatabase());
-
-    }
-
-//    public List<DiaperChangingData> getAllDiaperChangingData() {
-//        return DiaperChangingSQLite.getAllDiaperChangingData(modelSQLLite.getReadableDatabase());
-//    }
-//
-//    public void addDiaperChangingData(DiaperChangingData dcd) {
-//        DiaperChangingSQLite.addDiaperChangingData(dcd, modelSQLLite.getWritableDatabase());
-//    }
 
     public LiveData<List<PostData>> getAllForumData() {
         return forumListLiveData;

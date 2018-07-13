@@ -43,7 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-    <EditText
+    <com.example.adinepst.mybabylist.Utils.TimeEditText
         android:id="@+id/feading_ET_time"
         android:layout_width="107dp"
         android:layout_height="wrap_content"
@@ -51,7 +51,6 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="HH/MM"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
         app:layout_constraintStart_toEndOf="@+id/textView9"
@@ -86,14 +85,12 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:text="Comment: "
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/feading_IB_submit"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/feading_ET_time" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
         android:id="@+id/feading_ET_comment"
@@ -110,7 +107,7 @@
     <ImageButton
         android:id="@+id/feading_IB_submit"
         android:layout_width="328dp"
-        android:layout_height="90dp"
+        android:layout_height="93dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"

@@ -200,7 +200,6 @@ public class RegisterFragment extends Fragment {
             if (e!=null)
                 emailET.setText(e);
 
-
         }
     }
 

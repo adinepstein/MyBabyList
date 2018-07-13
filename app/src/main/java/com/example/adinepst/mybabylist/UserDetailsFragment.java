@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.adinepst.mybabylist.Activities.HistoryFragment;
+import com.example.adinepst.mybabylist.Activities.History.HistoryFragment;
 import com.example.adinepst.mybabylist.Forum.ForumFragment;
 import com.example.adinepst.mybabylist.Model.Model;
 import com.example.adinepst.mybabylist.Utils.Age;

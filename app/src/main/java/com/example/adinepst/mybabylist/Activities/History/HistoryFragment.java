@@ -1,7 +1,11 @@
-package com.example.adinepst.mybabylist.Activities;
+package com.example.adinepst.mybabylist.Activities.History;
 
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -19,10 +23,12 @@ import com.example.adinepst.mybabylist.Activities.Diaper.AddDiaperFragment;
 import com.example.adinepst.mybabylist.Activities.Diaper.DiaperDetailsFragment;
 import com.example.adinepst.mybabylist.Activities.Feeding.AddFeedingFragment;
 import com.example.adinepst.mybabylist.Activities.Feeding.FeedingDetailsFragment;
+import com.example.adinepst.mybabylist.Activities.Feeding.FeedingListViewModel;
 import com.example.adinepst.mybabylist.Activities.Sleeping.AddSleepingFragment;
 import com.example.adinepst.mybabylist.Activities.Sleeping.SleepingDetailsFragment;
 import com.example.adinepst.mybabylist.R;
-import com.example.adinepst.mybabylist.Utils.HistoryData;
+import com.example.adinepst.mybabylist.Activities.History.HistoryData;
+import com.example.adinepst.mybabylist.Utils.FeedingData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,15 +38,29 @@ import java.util.List;
  */
 public class HistoryFragment extends Fragment {
 
+    private HistoryListViewModel historyListViewModel;
     private HistoryListAdapter adapter;
     private Button sleepingDetailBT;
     private Button feedingDetailBT;
     private Button diaperDetailBT;
 
-    public HistoryFragment() {
-        // Required empty public constructor
+    public static HistoryFragment newInstance() {
+        HistoryFragment fragment = new HistoryFragment();
+        return fragment;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        historyListViewModel = ViewModelProviders.of(this).get(HistoryListViewModel.class);
+        historyListViewModel.getData().observe(this, new Observer<List<HistoryData>>() {
+            @Override
+            public void onChanged(@Nullable List<HistoryData> historyDataList) {
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,10 +71,7 @@ public class HistoryFragment extends Fragment {
         feedingDetailBT = view.findViewById(R.id.history_B_foodDetails);
         diaperDetailBT = view.findViewById(R.id.history_B_DiapersDetails);
         adapter = new HistoryListAdapter();
-        for(int i=0; i<50; i++){
-            HistoryData h= new HistoryData(""+ i+ "/01/18",""+i, "150." + i, "15."+ i, ""+i, ""+ i);
-            adapter.data.add(h);
-        }
+        list.setAdapter(adapter);
         sleepingDetailBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +102,7 @@ public class HistoryFragment extends Fragment {
                 tran.commit();
             }
         });
-        list.setAdapter(adapter);
+
         setHasOptionsMenu(true);
         return view;
     }
@@ -134,7 +151,7 @@ public class HistoryFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return data.size();
+            return historyListViewModel.getData().getValue().size();
         }
 
         @Override
@@ -149,44 +166,27 @@ public class HistoryFragment extends Fragment {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            if(view==null){
-                view = LayoutInflater.from(getActivity()).inflate(R.layout.history_row,null);
-            }
-            HistoryData hd= data.get(i);
-            TextView date= view.findViewById(R.id.history_row_day);
-            date.setText(hd.getDay());
-            TextView numFeading = view.findViewById(R.id.history_row_numOfFood);
-            numFeading.setText(hd.getNumOfFeadings());
-            TextView avgAmount= view.findViewById(R.id.history_row_avgAmount);
-            avgAmount.setText(hd.getAvgAmount());
-            TextView hoursSleeping = view.findViewById(R.id.history_row_hoursPerDaySleeping);
-            hoursSleeping.setText(hd.getSleepingHours());
-            TextView numUrine= view.findViewById(R.id.history_row_numUrine);
-            numUrine.setText(hd.getNumofUrines());
-            TextView numPoop = view.findViewById(R.id.history_row_numPoop);
-            numPoop.setText(hd.getNumOfPoops());
+            if(view==null) {
+                view = LayoutInflater.from(getActivity()).inflate(R.layout.history_row, null);
 
+                HistoryData hd = historyListViewModel.getData().getValue().get(i);
+                TextView date = view.findViewById(R.id.history_row_day);
+                date.setText(hd.getDay());
+                TextView numFeading = view.findViewById(R.id.history_row_numOfFood);
+                numFeading.setText(hd.getNumOfFeadings());
+                TextView avgAmount = view.findViewById(R.id.history_row_avgAmount);
+                avgAmount.setText(hd.getAvgAmount());
+                TextView hoursSleeping = view.findViewById(R.id.history_row_hoursPerDaySleeping);
+                hoursSleeping.setText(hd.getSleepingHours());
+                TextView numUrine = view.findViewById(R.id.history_row_numUrine);
+                numUrine.setText(hd.getNumofUrines());
+                TextView numPoop = view.findViewById(R.id.history_row_numPoop);
+                numPoop.setText(hd.getNumOfPoops());
+            }
             return view;
 
         }
     }
 
-//    public class HistoryData{
-//        String day;
-//        String numOfFeadings;
-//        String avgAmount;
-//        String sleepingHours;
-//        String numOfPoops;
-//        String numofUrines;
-//
-//        public HistoryData(String day, String numOfFeadings, String avgAmount, String sleepingHours, String numOfPoops, String numofUrines) {
-//            this.day = day;
-//            this.numOfFeadings = numOfFeadings;
-//            this.avgAmount = avgAmount;
-//            this.sleepingHours = sleepingHours;
-//            this.numOfPoops = numOfPoops;
-//            this.numofUrines = numofUrines;
-//        }
-//    }
 
 }

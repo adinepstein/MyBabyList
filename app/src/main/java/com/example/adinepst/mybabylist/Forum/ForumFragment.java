@@ -123,18 +123,17 @@ public class ForumFragment extends Fragment {
             public void onClick(View view) {
                 String com = commentET.getText().toString();
                 int selected = parentRG.getCheckedRadioButtonId();
-                //TODO
                 parentType = null;
                 if (selected == R.id.addPost_RB_mother)
                     parentType = Model.instance.getUserData().getMotherName();
                 else if (selected == R.id.addPost_RB_father)
-                    parentType = Model.instance.getUserData().getMotherName();
+                    parentType = Model.instance.getUserData().getFatherName();
 
                 SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy kk:mm:ss");
                 format.setTimeZone(TimeZone.getTimeZone("Asia/Jerusalem"));
                 Date curDate = new Date();
                 String dateToStr = format.format(curDate);
-                //TODO- add picture
+
                 final PostData pd = new PostData(com, parentType, dateToStr, null, Model.instance.getUserData().getImageUrl());
                 if (imageBitmap != null) {
                     Model.instance.saveImage(imageBitmap, new Model.SaveImageListener() {
@@ -150,12 +149,13 @@ public class ForumFragment extends Fragment {
                 else
                     Model.instance.addPost(pd);
                 dialog.cancel();
+                imageBitmap=null;
             }
         });
 
         return true;
 
-//        return super.onOptionsItemSelected(item);
+
     }
 
     @Override
