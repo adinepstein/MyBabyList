@@ -31,7 +31,6 @@
         android:ems="10"
         android:inputType="textMultiLine"
         android:singleLine="false"
-        android:textAlignment="center"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/addPost_RG_fatherMother"
         app:layout_constraintStart_toStartOf="parent"

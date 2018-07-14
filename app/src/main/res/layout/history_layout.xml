@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="1dp"
         android:layout_marginStart="2dp"
@@ -19,9 +19,12 @@
         android:textColor="@android:color/background_light"
         android:textSize="26sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView24"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView19"
@@ -104,8 +107,9 @@
 
     <TextView
         android:id="@+id/textView21"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
         android:layout_marginTop="2dp"
         android:background="#af54c4"
         android:text=" # Poop  "
@@ -120,16 +124,16 @@
 
     <TextView
         android:id="@+id/textView25"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
         android:layout_marginTop="2dp"
         android:background="#af54c4"
-        android:text="  # Urine"
+        android:text=" # Urine "
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="14sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView24"
         app:layout_constraintEnd_toStartOf="@+id/textView21"
         app:layout_constraintStart_toStartOf="@+id/textView16"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />

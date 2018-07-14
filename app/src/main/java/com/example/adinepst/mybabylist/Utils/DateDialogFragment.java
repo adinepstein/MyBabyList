@@ -7,11 +7,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.DatePicker;
 
+import java.util.Date;
+
 public class DateDialogFragment extends DialogFragment {
     DateDialogFragmentListener listener;
     int year;
     int month;
     int day;
+
+    public DateDialogFragment() {
+
+    }
 
     public void setDate(int y, int m, int d) {
         year = y;
@@ -24,6 +30,11 @@ public class DateDialogFragment extends DialogFragment {
     }
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Date d= new Date();
+        year=d.getYear()+1900;
+        month=d.getMonth();
+        day=d.getDay()+8;
+
         Dialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -32,6 +43,7 @@ public class DateDialogFragment extends DialogFragment {
                 }
             }
         }, year,month,day);
+
         return dialog;
     }
 }

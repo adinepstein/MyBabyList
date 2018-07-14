@@ -18,7 +18,7 @@ public class SleepingAsyncDao {
 
             @Override
             protected List<SleepingData> doInBackground(String... strings) {
-//               LocalDB.db.sleepingDao().nukeTable();
+               LocalDB.db.sleepingDao().nukeTable();
                 List<SleepingData> list= LocalDB.db.sleepingDao().geAllData();
                 return list;
             }

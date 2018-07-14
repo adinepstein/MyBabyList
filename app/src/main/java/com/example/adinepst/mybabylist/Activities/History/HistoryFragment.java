@@ -168,7 +168,7 @@ public class HistoryFragment extends Fragment {
         public View getView(int i, View view, ViewGroup viewGroup) {
             if(view==null) {
                 view = LayoutInflater.from(getActivity()).inflate(R.layout.history_row, null);
-
+            }
                 HistoryData hd = historyListViewModel.getData().getValue().get(i);
                 TextView date = view.findViewById(R.id.history_row_day);
                 date.setText(hd.getDay());
@@ -182,7 +182,7 @@ public class HistoryFragment extends Fragment {
                 numUrine.setText(hd.getNumofUrines());
                 TextView numPoop = view.findViewById(R.id.history_row_numPoop);
                 numPoop.setText(hd.getNumOfPoops());
-            }
+
             return view;
 
         }

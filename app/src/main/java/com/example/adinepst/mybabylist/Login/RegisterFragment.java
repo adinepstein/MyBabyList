@@ -111,10 +111,12 @@ public class RegisterFragment extends Fragment {
                             //save student obj
                             imageUrl = url;
                             ud.setImageUrl(imageUrl);
+                            registerUser(ud);
                         }
                     });}
-
+                    else {
                     registerUser(ud);
+                }
             }});
 
         updateInstanceState(savedInstanceState);

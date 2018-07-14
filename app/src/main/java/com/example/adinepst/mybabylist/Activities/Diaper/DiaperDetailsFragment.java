@@ -80,6 +80,7 @@ public class DiaperDetailsFragment extends Fragment {
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
                 view = LayoutInflater.from(getActivity()).inflate(R.layout.diaper_row, null);
+            }
                 TextView start = view.findViewById(R.id.diaper_row_TV_date);
                 TextView type = view.findViewById(R.id.diaper_row_TV_type);
                 TextView comment = view.findViewById(R.id.diaper_row_TV_comment);
@@ -88,7 +89,7 @@ public class DiaperDetailsFragment extends Fragment {
                 comment.setText(dd.getComment());
                 type.setText(dd.getType());
 
-            }
+
             return view;
         }
     }

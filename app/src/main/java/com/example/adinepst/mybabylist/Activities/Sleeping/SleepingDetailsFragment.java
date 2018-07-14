@@ -81,6 +81,7 @@ public class SleepingDetailsFragment extends Fragment {
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
                 view = LayoutInflater.from(getActivity()).inflate(R.layout.sleeping_row, null);
+            }
                 TextView start = view.findViewById(R.id.sleeping_row_TV_start);
                 TextView end = view.findViewById(R.id.sleeping_row_TV_end);
                 TextView total = view.findViewById(R.id.sleeping_row_TV_total);
@@ -91,7 +92,7 @@ public class SleepingDetailsFragment extends Fragment {
                 end.setText(sd.getEndDate() + " " + sd.getEndTime());
                 total.setText(sd.getTotalTime());
 
-            }
+
             return view;
         }
     }

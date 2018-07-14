@@ -170,7 +170,8 @@ public class ForumFragment extends Fragment {
 
     }
     class MyAdapter extends BaseAdapter {
-
+        public MyAdapter(){
+        }
         @Override
         public int getCount() {
 
@@ -191,6 +192,7 @@ public class ForumFragment extends Fragment {
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
                 view = LayoutInflater.from(getActivity()).inflate(R.layout.forum_row, null);
+            }
                 TextView date = view.findViewById(R.id.forum_row_date);
                 TextView comment = view.findViewById(R.id.forum_row_comment);
                 final ImageView uploadImage = view.findViewById(R.id.forum_row_addingImg);
@@ -198,6 +200,7 @@ public class ForumFragment extends Fragment {
                 TextView parentName = view.findViewById(R.id.forum_row_TV_parentName);
 
                 final PostData pd = forumListViewModel.getData().getValue().get(i);
+
                 date.setText(pd.getDate());
                 comment.setText(pd.getComment());
                 babyImage.setImageResource(R.drawable.baby);
@@ -224,7 +227,7 @@ public class ForumFragment extends Fragment {
                         }
                     });
                 }
-            }
+
             return view;
         }
     }

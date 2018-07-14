@@ -83,6 +83,7 @@ public class FeedingDetailsFragment extends Fragment {
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
                 view = LayoutInflater.from(getActivity()).inflate(R.layout.feeding_row, null);
+            }
                 TextView date = view.findViewById(R.id.feeding_row_TV_date);
                 TextView amount = view.findViewById(R.id.feeding_row_TV_amount);
                 TextView comment = view.findViewById(R.id.feeding_row_TV_comment);
@@ -91,7 +92,7 @@ public class FeedingDetailsFragment extends Fragment {
                 comment.setText(fd.getComment());
                 amount.setText(Double.toString(fd.getAmount()));
 
-            }
+
             return view;
         }
     }
